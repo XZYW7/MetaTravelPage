@@ -69,12 +69,39 @@ function applyTheme(theme) {
   }
 }
 
+function parseDateForSort(dateStr) {
+  if (!dateStr) return 50000;
+  
+  // Parse dates like "6月15日", "2026年6月15日", "6月15日 · 第1天"
+  const monthDayMatch = dateStr.match(/(\d+)月(\d+)日/);
+  if (monthDayMatch) {
+    return parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2]);
+  }
+  
+  // Parse "Day X" format
+  const dayMatch = dateStr.match(/Day\s*(\d+)/i);
+  if (dayMatch) {
+    return 50000 + parseInt(dayMatch[1]);
+  }
+  
+  return 50000;
+}
+
 function renderCards(cards) {
   const track = document.getElementById('track');
   track.innerHTML = '';
   
+  // Process cards: auto-assign sort_index based on date if not set
+  const processedCards = cards.map(card => {
+    const processed = { ...card };
+    if (processed.sort_index === undefined && processed.date) {
+      processed.sort_index = parseDateForSort(processed.date);
+    }
+    return processed;
+  });
+  
   // Sort cards by sort_index
-  const sortedCards = [...cards].sort((a, b) => {
+  const sortedCards = processedCards.sort((a, b) => {
     const aIndex = a.sort_index ?? 50000000;
     const bIndex = b.sort_index ?? 50000000;
     return aIndex - bIndex;
