@@ -1,6 +1,6 @@
 {
-  "appId": "com.example.travelguide",
-  "appName": "旅行指南",
+  "appId": "com.example.metatravelpage",
+  "appName": "MetaTravelPage",
   "webDir": ".",
   "server": {
     "androidScheme": "https"

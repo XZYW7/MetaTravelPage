@@ -1,4 +1,4 @@
-# Travel Page - 通用旅程/流程指南应用框架
+# MetaTravelPage - 通用旅程/流程指南应用框架
 
 一个通用的卡片式旅程/流程指南应用框架。可以将任何旅行行程、康复指南、流程文档转化为美观的滑动卡片式移动端应用。
 
@@ -16,8 +16,8 @@
 
 1. 克隆仓库：
    ```bash
-   git clone https://github.com/XZYW7/travel-page.git
-   cd travel-page
+   git clone https://github.com/XZYW7/MetaTravelPage.git
+   cd MetaTravelPage
    ```
 
 2. 启动本地服务器：
