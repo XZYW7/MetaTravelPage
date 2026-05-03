@@ -1,192 +1,197 @@
-# Travel Page Framework
+# Travel Page - 通用旅程/流程指南应用框架
 
-A generic card-based journey/flow guide application framework. Transform any travel itinerary, recovery guide, or process documentation into a beautiful, swipeable card-based mobile application.
+一个通用的卡片式旅程/流程指南应用框架。可以将任何旅行行程、康复指南、流程文档转化为美观的滑动卡片式移动端应用。
 
-## Features
+## 功能特点
 
-- **Data-Driven**: Content defined in JSON configuration
-- **Agent-Friendly**: AI agents can generate configurations from text materials
-- **Plugin System**: Timer, diary, phrasebook, and more
-- **Responsive Design**: Works on mobile and desktop
-- **Dark Mode**: Automatic dark/light theme support
-- **Offline Support**: Local storage for diaries and data
-- **Easy Deployment**: Static files, no server required (optional backend available)
+- **数据驱动**：通过 JSON 配置文件定义内容
+- **Agent 友好**：AI Agent 可从文本材料自动生成配置
+- **插件系统**：计时器、日记、语音短语本等
+- **响应式设计**：支持移动端和桌面端
+- **深色模式**：自动适配深色/浅色主题
+- **离线支持**：日记和数据可本地存储
+- **易于部署**：纯静态文件，无需服务器（可选后端）
 
-## Quick Start
+## 快速开始
 
-1. Clone the repository:
+1. 克隆仓库：
    ```bash
    git clone https://github.com/XZYW7/travel-page.git
    cd travel-page
    ```
 
-2. Open `index.html` in a browser
+2. 启动本地服务器：
+   ```bash
+   python -m http.server 8000
+   ```
 
-3. Edit `config/journey.json` to customize your content
+3. 打开浏览器访问 http://localhost:8000
 
-## Project Structure
+4. 编辑 `config/journey.json` 自定义内容
+
+## 项目结构
 
 ```
 travel-page/
-├── core/                        # Core engine (don't modify)
-│   ├── renderer.js             # Dynamic rendering engine
-│   ├── swipe.js                # Card swipe logic
-│   ├── calendar.js             # Calendar component
-│   ├── diary.js                # Diary management
-│   ├── timer.js                # Timer plugin
-│   ├── phrasebook.js           # Phrasebook plugin
-│   ├── storage.js              # Storage adapter
-│   └── validate.js             # Schema validation
-├── config/                      # Configuration (customize this)
-│   └── journey.json            # Application config
-├── examples/                    # Example configurations
-│   └── thailand-travel/        # Thailand travel guide example
-├── assets/                      # Static resources
-│   ├── audio/                  # Audio files
-│   └── images/                 # Image files
+├── core/                        # 核心引擎（不要修改）
+│   ├── renderer.js             # 动态渲染引擎
+│   ├── swipe.js                # 卡片滑动逻辑
+│   ├── calendar.js             # 日历组件
+│   ├── diary.js                # 日记管理
+│   ├── timer.js                # 计时器插件
+│   ├── phrasebook.js           # 语音短语本插件
+│   ├── storage.js              # 存储适配器
+│   └── validate.js             # Schema 校验
+├── config/                      # 配置文件（自定义此目录）
+│   └── journey.json            # 应用配置
+├── examples/                    # 示例配置
+│   └── thailand-travel/        # 泰国旅行指南示例
+├── assets/                      # 静态资源
+│   ├── audio/                  # 音频文件
+│   └── images/                 # 图片文件
 ├── schema/                      # JSON Schema
 │   └── journey.schema.json
-├── docs/                        # Documentation
-│   ├── AGENT_PROMPT.md         # Agent configuration guide
-│   ├── SCHEMA.md               # Schema documentation
-│   └── PLUGINS.md              # Plugin development guide
-├── index.html                  # Main page (skeleton)
-├── styles.css                  # Styles
-├── server.py                   # Optional backend
-└── README.md                   # This file
+├── docs/                        # 文档
+│   ├── AGENT_PROMPT.md         # Agent 配置生成指南
+│   ├── SCHEMA.md               # Schema 文档
+│   └── PLUGINS.md              # 插件开发指南
+├── index.html                  # 主页面（骨架）
+├── styles.css                  # 样式
+├── server.py                   # 可选后端
+└── README.md                   # 本文件
 ```
 
-## How It Works
+## 工作原理
 
-1. **Define Content**: Create a `journey.json` configuration file
-2. **Dynamic Rendering**: The framework reads the config and generates card DOM
-3. **User Interaction**: Users swipe through cards, use plugins, write diaries
+1. **定义内容**：创建 `journey.json` 配置文件
+2. **动态渲染**：框架读取配置并生成卡片 DOM
+3. **用户交互**：用户滑动卡片、使用插件、写日记
 
-## Agent Workflow
+## Agent 工作流
 
-This framework is designed to work with AI agents:
+本框架专为与 AI Agent 协作设计：
 
-1. Agent reads `schema/journey.schema.json` for structure
-2. Agent reads `docs/AGENT_PROMPT.md` for generation guidelines
-3. Agent analyzes user-provided travel materials
-4. Agent generates `journey.json` configuration
-5. Framework renders the configuration into a beautiful app
+1. Agent 读取 `schema/journey.schema.json` 了解结构
+2. Agent 读取 `docs/AGENT_PROMPT.md` 了解生成规范
+3. Agent 分析用户提供的旅行材料
+4. Agent 生成 `journey.json` 配置文件
+5. 框架将配置渲染为美观的应用
 
-## Configuration
+## 配置说明
 
-### Basic Structure
+### 基本结构
 
 ```json
 {
   "schema_version": "1.0.0",
   "app": {
-    "title": "My Travel Guide",
-    "subtitle": "A beautiful journey",
+    "title": "我的旅行指南",
+    "subtitle": "一段美好的旅程",
     "icon": "✈️"
   },
   "features": {
-    "diary": { "enabled": true },
+    "diary": { "enabled": true, "storage": "local" },
     "timer": { "enabled": true },
     "phrasebook": { "enabled": true }
   },
-  "cards": [
-    {
-      "id": "cover",
-      "type": "cover",
-      "title": "My Travel Guide"
-    },
-    {
-      "id": "day_1",
-      "type": "standard",
-      "date": "Day 1",
-      "title": "First Day",
-      "sections": [...]
-    }
-  ]
+  "cards": [...]
 }
 ```
 
-### Card Types
+### 存储模式
 
-- **cover**: Landing page with title and icon
-- **standard**: Main content cards with sections
-- **reference**: Appendix/quick reference cards
+日记功能支持两种存储模式：
 
-### Section Types
+| 模式 | 配置 | 说明 |
+|------|------|------|
+| 本地存储 | `"storage": "local"` | 保存在浏览器 IndexedDB，换浏览器或清缓存会丢失 |
+| 云端存储 | `"storage": "remote"` + `"backend_url"` | 保存到 `server.py` 服务器的 `diaries/` 目录 |
 
-- **timeline**: Chronological events
-- **table**: Structured data
-- **info_box**: Important notices (info/warning/danger/success)
-- **checklist**: Task/item lists
-- **expandable**: Collapsible content
-- **phrasebook**: Foreign language phrases with audio
+配置示例：
+```json
+{
+  "diary": {
+    "enabled": true,
+    "storage": "remote",
+    "backend_url": "http://localhost:5000"
+  }
+}
+```
 
-## Examples
+使用云端存储需要启动后端：
+```bash
+python server.py
+```
 
-See `examples/thailand-travel/` for a complete example of a Thailand travel guide.
+### 卡片类型
 
-### Using the Example
+- **cover**：封面页，包含标题和图标
+- **standard**：主要内容卡片，包含多个 section
+- **reference**：附录/速查卡片
 
-**Option 1: PowerShell Script**
+### Section 类型
+
+- **timeline**：时间线，按时间顺序展示事件
+- **table**：表格，展示结构化数据
+- **info_box**：提示框（info/warning/danger/success 四种样式）
+- **checklist**：清单，待办事项列表
+- **expandable**：可展开内容，点击展开/收起
+- **phrasebook**：短语本，外语短语带发音
+
+## 示例
+
+查看 `examples/thailand-travel/` 目录，这是一个完整的泰国旅行指南示例。
+
+### 使用示例
+
+**方式 1：PowerShell 脚本**
 ```powershell
 .\use-example.ps1
 ```
 
-**Option 2: Manual Copy**
+**方式 2：手动复制**
 ```bash
-# Copy config
+# 复制配置
 copy examples\thailand-travel\journey.json config\journey.json
 
-# Copy audio files
+# 复制音频文件
 xcopy /E /I /Y examples\thailand-travel\assets\audio assets\audio
 ```
 
-**Option 3: Direct Reference**
-Edit `config/journey.json` and point to the example:
-```json
-{
-  "$ref": "examples/thailand-travel/journey.json"
-}
-```
+## 文档
 
-## Documentation
+- [Agent 配置生成指南](docs/AGENT_PROMPT.md) - 如何使用 AI Agent 生成配置
+- [Schema 文档](docs/SCHEMA.md) - 详细的 Schema 参考
+- [插件开发指南](docs/PLUGINS.md) - 如何开发自定义插件
 
-- [Agent Prompt Guide](docs/AGENT_PROMPT.md) - How to use AI agents to generate configs
-- [Schema Documentation](docs/SCHEMA.md) - Detailed schema reference
-- [Plugin Guide](docs/PLUGINS.md) - How to develop custom plugins
+## 部署
 
-## Deployment
+### 静态托管
 
-### Static Hosting
-
-Simply upload the entire directory to any static hosting service:
+将整个目录上传到任意静态托管服务即可：
 - GitHub Pages
 - Netlify
 - Vercel
-- Any web server
+- 任意 Web 服务器
 
-### With Backend (Optional)
+### 使用后端（可选）
 
-For diary sync across devices, deploy `server.py`:
+如需跨设备同步日记，部署 `server.py`：
 
 ```bash
 python server.py
 ```
 
-The server runs on port 5000 by default.
+服务默认运行在 5000 端口。
 
-## Contributing
+## 贡献
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+1. Fork 本仓库
+2. 创建功能分支
+3. 提交更改
+4. 推送到分支
+5. 创建 Pull Request
 
-## License
+## 许可证
 
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Acknowledgments
-
-Built with ❤️ for travelers, patients, and anyone who needs a beautiful step-by-step guide.
+MIT 许可证 - 详见 [LICENSE](LICENSE)

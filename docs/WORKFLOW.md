@@ -1,100 +1,100 @@
-# Complete Workflow Guide
+# 完整工作流指南
 
-This guide describes the complete workflow for creating a journey/flow guide application using the travel-page framework.
+本指南介绍使用 travel-page 框架创建旅程/流程指南应用的完整工作流。
 
-## Overview
+## 概述
 
-The workflow consists of three main stages:
-1. **Agent Generation**: AI agent generates configuration from materials
-2. **Asset Preparation**: Developer provides required assets
-3. **Deployment**: Deploy the application
+工作流包含三个主要阶段：
+1. **Agent 生成**：AI Agent 从材料生成配置
+2. **资源准备**：开发者提供所需资源
+3. **部署发布**：部署应用
 
-## Workflow Diagram
+## 工作流图
 
 ```
-User Input (Travel Materials)
+用户输入（旅行材料）
         ↓
-   Agent Processing
-   ├── Read schema/journey.schema.json
-   ├── Read docs/AGENT_PROMPT.md
-   └── Analyze user materials
+   Agent 处理
+   ├── 读取 schema/journey.schema.json
+   ├── 读取 docs/AGENT_PROMPT.md
+   └── 分析用户材料
         ↓
-   Agent Output
+   Agent 输出
    ├── config/journey.json
-   └── Asset requirements list
+   └── 资源需求清单
         ↓
-   Developer Action
-   ├── Provide audio files
-   ├── Provide images
-   └── Customize as needed
+   开发者操作
+   ├── 提供音频文件
+   ├── 提供图片资源
+   └── 按需自定义
         ↓
-   Framework Rendering
-   └── Complete journey card application
+   框架渲染
+   └── 完整的旅程卡片应用
 ```
 
-## Step 1: Prepare Materials
+## 第 1 步：准备材料
 
-Gather your travel/flow materials in any format:
-- Text documents
-- Web pages
-- PDFs
-- Spreadsheets
-- Notes
+以任意格式收集旅行/流程材料：
+- 文本文档
+- 网页
+- PDF 文件
+- 电子表格
+- 笔记
 
-**Example Materials:**
-- Travel itinerary
-- Hotel bookings
-- Flight details
-- Activity schedules
-- Contact information
-- Important phrases
+**示例材料：**
+- 旅行行程
+- 酒店预订
+- 航班信息
+- 活动安排
+- 联系方式
+- 常用短语
 
-## Step 2: Agent Generation
+## 第 2 步：Agent 生成
 
-### Option A: Using ChatGPT/Claude
+### 方式 A：使用 ChatGPT/Claude
 
-1. Open your AI assistant
-2. Provide the System Prompt from `docs/AGENT_PROMPT.md`
-3. Provide the Schema from `schema/journey.schema.json`
-4. Provide your travel materials
-5. Ask the agent to generate `journey.json`
+1. 打开 AI 助手
+2. 提供 `docs/AGENT_PROMPT.md` 中的系统提示词
+3. 提供 `schema/journey.schema.json` 的 Schema 定义
+4. 提供旅行材料
+5. 让 Agent 生成 `journey.json`
 
-**Example Prompt:**
+**示例提示词：**
 ```
-Please generate a journey.json configuration for my Thailand travel guide.
+请为我的泰国旅行生成 journey.json 配置。
 
-Here are my travel materials:
-- Day 1: Arrive Bangkok, check into hotel
-- Day 2: Visit Grand Palace, Wat Pho
-- Day 3: Floating market tour
-- Day 4: Beach day in Pattaya
-- Day 5: Return home
+旅行材料：
+- 第1天：抵达曼谷，入住酒店
+- 第2天：大皇宫、卧佛寺、湄南河
+- 第3天：购物、水上市场
+- 第4天：飞往清迈，古城漫步
+- 第5天：返程
 
-I need Thai language phrases for:
-- Hello: สวัสดี
-- Thank you: ขอบคุณ
-- How much: เท่าไหร่
+需要泰语短语：
+- 你好：สวัสดี
+- 谢谢：ขอบคุณ
+- 多少钱：เท่าไหร่
 ```
 
-### Option B: Using the Framework's Validation
+### 方式 B：使用框架校验
 
-After generating the configuration, validate it:
+生成配置后进行校验：
 
 ```javascript
-// In browser console
+// 在浏览器控制台中
 const response = await fetch('config/journey.json');
 const config = await response.json();
 const result = validateJourney(config);
 console.log(result);
 ```
 
-## Step 3: Asset Preparation
+## 第 3 步：资源准备
 
-Based on the agent's output, prepare required assets:
+根据 Agent 输出准备所需资源：
 
-### Audio Files
+### 音频文件
 
-If the configuration includes a phrasebook, provide audio files:
+如果配置包含短语本，提供音频文件：
 
 ```
 assets/audio/
@@ -104,14 +104,14 @@ assets/audio/
 └── ...
 ```
 
-**Audio Requirements:**
-- Format: MP3
-- Quality: 128kbps or higher
-- Duration: 2-5 seconds per phrase
+**音频要求：**
+- 格式：MP3
+- 质量：128kbps 或更高
+- 时长：每个短语 2-5 秒
 
-### Images
+### 图片资源
 
-If the configuration includes image references:
+如果配置中引用了图片：
 
 ```
 assets/images/
@@ -120,24 +120,24 @@ assets/images/
 └── ...
 ```
 
-**Image Requirements:**
-- Format: PNG, JPG, or WebP
-- Size: Optimize for mobile (max 1920px width)
-- File size: Keep under 500KB per image
+**图片要求：**
+- 格式：PNG、JPG 或 WebP
+- 尺寸：针对移动端优化（最大宽度 1920px）
+- 文件大小：每张图片不超过 500KB
 
-## Step 4: Configuration
+## 第 4 步：配置
 
-### Copy Configuration
+### 复制配置
 
-Copy the generated `journey.json` to the `config/` directory:
+将生成的 `journey.json` 复制到 `config/` 目录：
 
 ```bash
 cp path/to/generated/journey.json config/
 ```
 
-### Customize Theme
+### 自定义主题
 
-Adjust theme colors in `journey.json`:
+在 `journey.json` 中调整主题颜色：
 
 ```json
 {
@@ -151,32 +151,32 @@ Adjust theme colors in `journey.json`:
 }
 ```
 
-### Enable/Disable Features
+### 启用/禁用功能
 
-Toggle features as needed:
+根据需要切换功能：
 
 ```json
 {
   "features": {
-    "diary": { "enabled": true },
+    "diary": { "enabled": true, "storage": "local" },
     "timer": { "enabled": false },
     "phrasebook": { "enabled": true }
   }
 }
 ```
 
-## Step 5: Testing
+## 第 5 步：测试
 
-### Local Testing
+### 本地测试
 
-1. Open `index.html` in a browser
-2. Test card navigation (swipe or arrow keys)
-3. Test plugins (timer, diary, phrasebook)
-4. Test on mobile devices
+1. 在浏览器中打开 `index.html`
+2. 测试卡片导航（滑动或方向键）
+3. 测试插件（计时器、日记、短语本）
+4. 在移动设备上测试
 
-### Validation
+### 校验
 
-Run validation in browser console:
+在浏览器控制台运行校验：
 
 ```javascript
 const response = await fetch('config/journey.json');
@@ -184,53 +184,53 @@ const config = await response.json();
 const result = validateJourney(config);
 
 if (result.valid) {
-  console.log('✅ Configuration is valid');
+  console.log('✅ 配置有效');
 } else {
-  console.error('❌ Validation errors:', result.errors);
+  console.error('❌ 校验错误:', result.errors);
 }
 ```
 
-## Step 6: Deployment
+## 第 6 步：部署
 
-### Static Hosting
+### 静态托管
 
-Upload the entire directory to any static hosting:
+将整个目录上传到任意静态托管服务：
 
-**GitHub Pages:**
+**GitHub Pages：**
 ```bash
 git add .
-git commit -m "Deploy travel guide"
+git commit -m "部署旅行指南"
 git push origin main
-# Enable GitHub Pages in repository settings
+# 在仓库设置中启用 GitHub Pages
 ```
 
-**Netlify:**
-1. Connect your GitHub repository
-2. Set build command: (leave empty)
-3. Set publish directory: `.`
-4. Deploy
+**Netlify：**
+1. 连接 GitHub 仓库
+2. 构建命令：留空
+3. 发布目录：`.`
+4. 部署
 
-**Vercel:**
-1. Import your GitHub repository
-2. Framework preset: Other
-3. Deploy
+**Vercel：**
+1. 导入 GitHub 仓库
+2. 框架预设：Other
+3. 部署
 
-### Custom Domain
+### 自定义域名
 
-Configure custom domain in your hosting provider's settings.
+在托管服务商的设置中配置自定义域名。
 
-## Step 7: Distribution
+## 第 7 步：分发
 
-### Share Link
+### 分享链接
 
-Share the deployed URL with users.
+将部署后的 URL 分享给用户。
 
-### APK Generation (Optional)
+### APK 生成（可选）
 
-For Android app distribution:
+用于 Android 应用分发：
 
-1. Use Capacitor to wrap the web app
-2. Build APK:
+1. 使用 Capacitor 封装 Web 应用
+2. 构建 APK：
    ```bash
    npx cap init
    npx cap add android
@@ -238,81 +238,81 @@ For Android app distribution:
    npx cap open android
    ```
 
-## Example Workflow
+## 示例工作流
 
-### Input Materials
+### 输入材料
 
 ```
-Thailand Travel Guide
-- 5 days in Bangkok and Pattaya
-- Need Thai phrases
-- Budget: $1000
+泰国旅行指南
+- 曼谷和清迈 5 天
+- 需要泰语短语
+- 预算：¥8000
 ```
 
-### Agent Output
+### Agent 输出
 
 ```json
 {
   "schema_version": "1.0.0",
   "app": {
-    "title": "Thailand Travel Guide",
-    "subtitle": "5-Day Adventure",
+    "title": "泰国旅行指南",
+    "subtitle": "5日自由行",
     "icon": "🇹🇭"
   },
   "features": {
-    "phrasebook": { "enabled": true, "language": "Thai" }
+    "phrasebook": { "enabled": true, "language": "泰语" }
   },
   "cards": [...]
 }
 ```
 
-### Developer Action
+### 开发者操作
 
-1. Generate Thai language audio files
-2. Add images of destinations
-3. Customize theme colors
-4. Test on mobile
+1. 生成泰语音频文件
+2. 添加目的地图片
+3. 自定义主题颜色
+4. 移动端测试
 
-### Final Result
+### 最终成果
 
-A beautiful, swipeable card-based travel guide application with:
-- Cover page
-- Daily itinerary cards
-- Thai language phrasebook
-- Important information cards
-- Diary functionality
-- Timer for activities
+一个美观的、可滑动的卡片式旅行指南应用，包含：
+- 封面页
+- 每日行程卡片
+- 泰语短语本
+- 重要信息卡片
+- 日记功能
+- 计时器功能
 
-## Troubleshooting
+## 常见问题
 
-### Configuration Not Loading
+### 配置未加载
 
-1. Check `config/journey.json` exists
-2. Verify JSON syntax is valid
-3. Check browser console for errors
+1. 检查 `config/journey.json` 是否存在
+2. 验证 JSON 语法是否有效
+3. 查看浏览器控制台错误信息
 
-### Audio Not Playing
+### 音频不播放
 
-1. Verify audio files exist in `assets/audio/`
-2. Check audio file format (MP3 recommended)
-3. Ensure file names match configuration
+1. 确认音频文件存在于 `assets/audio/`
+2. 检查音频格式（推荐 MP3）
+3. 确保文件名与配置匹配
 
-### Styling Issues
+### 样式问题
 
-1. Clear browser cache
-2. Check CSS file is loaded
-3. Verify theme configuration
+1. 清除浏览器缓存
+2. 检查 CSS 文件是否加载
+3. 验证主题配置
 
-### Mobile Issues
+### 移动端问题
 
-1. Test on actual device
-2. Check viewport meta tag
-3. Test touch interactions
+1. 在真机上测试
+2. 检查 viewport meta 标签
+3. 测试触摸交互
 
-## Best Practices
+## 最佳实践
 
-1. **Start Simple**: Begin with basic configuration, add features later
-2. **Test Early**: Test on mobile devices throughout development
-3. **Validate Often**: Run validation after each configuration change
-4. **Backup**: Keep backups of your configuration and assets
-5. **Document**: Document any customizations for future reference
+1. **从简单开始**：先用基本配置，后续再添加功能
+2. **尽早测试**：在整个开发过程中在移动设备上测试
+3. **经常校验**：每次修改配置后运行校验
+4. **做好备份**：备份配置和资源文件
+5. **记录变更**：记录自定义内容以便后续参考

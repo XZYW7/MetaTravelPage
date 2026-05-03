@@ -1,24 +1,24 @@
-# Plugin Development Guide
+# 插件开发指南
 
-This guide explains how to develop custom plugins for the travel-page framework.
+本指南介绍如何为 travel-page 框架开发自定义插件。
 
-## Plugin Architecture
+## 插件架构
 
-The framework uses a plugin system to extend functionality. Plugins are initialized based on the `features` configuration in `journey.json`.
+框架使用插件系统扩展功能。插件根据 `journey.json` 中的 `features` 配置进行初始化。
 
-## Built-in Plugins
+## 内置插件
 
-### Diary Plugin (`core/diary.js`)
+### 日记插件 (`core/diary.js`)
 
-Manages personal diary/journal entries.
+管理个人日记/日志条目。
 
-**Features:**
-- Create and edit diary entries
-- Rich text editing with Quill.js
-- Image upload support
-- Local and remote storage
+**功能：**
+- 创建和编辑日记条目
+- 富文本编辑（Quill.js）
+- 图片上传支持
+- 本地和云端存储
 
-**Configuration:**
+**配置：**
 ```json
 {
   "diary": {
@@ -29,56 +29,56 @@ Manages personal diary/journal entries.
 }
 ```
 
-### Timer Plugin (`core/timer.js`)
+### 计时器插件 (`core/timer.js`)
 
-Provides countdown timer functionality.
+提供倒计时功能。
 
-**Features:**
-- Configurable presets
-- Start/pause/reset controls
-- Vibration notification
-- Customizable label
+**功能：**
+- 可配置的预设时间
+- 开始/暂停/重置控制
+- 振动通知
+- 可自定义标签
 
-**Configuration:**
+**配置：**
 ```json
 {
   "timer": {
     "enabled": true,
     "presets": [15, 30, 45, 60],
-    "label": "Timer"
+    "label": "计时器"
   }
 }
 ```
 
-### Phrasebook Plugin (`core/phrasebook.js`)
+### 短语本插件 (`core/phrasebook.js`)
 
-Provides foreign language phrase playback.
+提供外语短语播放功能。
 
-**Features:**
-- Audio file playback
-- Phrase mapping from configuration
-- Multiple language support
+**功能：**
+- 音频文件播放
+- 从配置映射短语
+- 支持多语言
 
-**Configuration:**
+**配置：**
 ```json
 {
   "phrasebook": {
     "enabled": true,
-    "language": "Thai",
+    "language": "泰语",
     "audio_path": "assets/audio/"
   }
 }
 ```
 
-## Creating a Custom Plugin
+## 创建自定义插件
 
-### Step 1: Create Plugin File
+### 第 1 步：创建插件文件
 
-Create a new file in `core/` directory, e.g., `core/myplugin.js`.
+在 `core/` 目录下创建新文件，如 `core/myplugin.js`。
 
 ```javascript
-// ========== MY PLUGIN ==========
-// Description of your plugin
+// ========== 我的插件 ==========
+// 插件描述
 
 let myPluginConfig = null;
 
@@ -86,18 +86,18 @@ function initMyPlugin(config) {
   if (!config) return;
   myPluginConfig = config;
   
-  // Initialize your plugin
-  console.log('My plugin initialized');
+  // 初始化插件
+  console.log('插件已初始化');
 }
 
 function myPluginFunction() {
-  // Plugin functionality
+  // 插件功能
 }
 ```
 
-### Step 2: Add Configuration Schema
+### 第 2 步：添加配置 Schema
 
-Add your plugin configuration to the schema in `schema/journey.schema.json`:
+在 `schema/journey.schema.json` 中添加插件配置：
 
 ```json
 {
@@ -117,88 +117,88 @@ Add your plugin configuration to the schema in `schema/journey.schema.json`:
 }
 ```
 
-### Step 3: Update Renderer
+### 第 3 步：更新渲染器
 
-Update `core/renderer.js` to initialize your plugin:
+在 `core/renderer.js` 中初始化插件：
 
 ```javascript
 function initFeatures(features) {
-  // ... existing code ...
+  // ... 现有代码 ...
   
-  // Initialize your plugin if enabled
+  // 如果启用则初始化你的插件
   if (features.myplugin?.enabled) {
     initMyPlugin(features.myplugin);
   }
 }
 ```
 
-### Step 4: Add to HTML
+### 第 4 步：添加到 HTML
 
-Add your plugin script to `index.html`:
+在 `index.html` 中添加插件脚本：
 
 ```html
 <script src="core/myplugin.js"></script>
 ```
 
-## Plugin Interface
+## 插件接口
 
-Each plugin should implement:
+每个插件应实现：
 
-### Initialization Function
+### 初始化函数
 
 ```javascript
 function initPluginName(config) {
-  // Initialize plugin with configuration
+  // 使用配置初始化插件
 }
 ```
 
-### Public Functions
+### 公共函数
 
 ```javascript
 function pluginNameAction() {
-  // Public API for the plugin
+  // 插件的公共 API
 }
 ```
 
-## Storage Integration
+## 存储集成
 
-Plugins can use the storage adapter for persistence:
+插件可以使用存储适配器进行数据持久化：
 
 ```javascript
 const storage = getStorageAdapter();
 
-// Save data
+// 保存数据
 await storage.saveDiary(date, content);
 
-// Load data
+// 加载数据
 const data = await storage.getDiary(date);
 ```
 
-## Event Handling
+## 事件处理
 
-Plugins can listen to DOM events:
+插件可以监听 DOM 事件：
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
-  // Plugin initialization
+  // 插件初始化
 });
 
 document.addEventListener('touchstart', (e) => {
-  // Handle touch events
+  // 处理触摸事件
 });
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Configuration-Driven**: Use configuration to control plugin behavior
-2. **Graceful Degradation**: Plugin should work even if config is missing
-3. **Error Handling**: Handle errors gracefully without breaking the app
-4. **Performance**: Minimize DOM operations and use efficient algorithms
-5. **Documentation**: Document plugin API and configuration options
+1. **配置驱动**：使用配置控制插件行为
+2. **优雅降级**：即使配置缺失，插件也应正常工作
+3. **错误处理**：优雅处理错误，不影响应用运行
+4. **性能优化**：减少 DOM 操作，使用高效算法
+5. **文档完善**：记录插件 API 和配置选项
 
-## Example: Weather Plugin
+## 示例：天气插件
 
-Here's an example of a weather plugin:
+天气插件示例：
 
 ```javascript
 // core/weather.js
@@ -210,7 +210,7 @@ function initWeather(config) {
   if (!config) return;
   weatherConfig = config;
   
-  // Fetch weather data
+  // 获取天气数据
   fetchWeather();
 }
 
@@ -224,42 +224,42 @@ async function fetchWeather() {
     weatherData = await response.json();
     updateWeatherDisplay();
   } catch (error) {
-    console.error('Failed to fetch weather:', error);
+    console.error('获取天气失败:', error);
   }
 }
 
 function updateWeatherDisplay() {
-  // Update UI with weather data
+  // 使用天气数据更新 UI
 }
 ```
 
-Configuration:
+配置：
 ```json
 {
   "weather": {
     "enabled": true,
     "api_key": "YOUR_API_KEY",
-    "location": "Bangkok"
+    "location": "曼谷"
   }
 }
 ```
 
-## Troubleshooting
+## 常见问题
 
-### Plugin Not Initializing
+### 插件未初始化
 
-1. Check if plugin is enabled in configuration
-2. Verify script is loaded in HTML
-3. Check browser console for errors
+1. 检查配置中是否启用了插件
+2. 确认脚本已在 HTML 中加载
+3. 查看浏览器控制台是否有错误
 
-### Plugin Functions Not Working
+### 插件函数不工作
 
-1. Ensure functions are globally accessible
-2. Check for typos in function names
-3. Verify configuration is valid
+1. 确保函数是全局可访问的
+2. 检查函数名是否拼写正确
+3. 验证配置是否有效
 
-### Storage Issues
+### 存储问题
 
-1. Check if storage adapter is initialized
-2. Verify IndexedDB is available (for local storage)
-3. Check network connectivity (for remote storage)
+1. 检查存储适配器是否已初始化
+2. 验证 IndexedDB 是否可用（本地存储）
+3. 检查网络连接（云端存储）

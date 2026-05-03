@@ -17,8 +17,8 @@
   "features": {
     "diary": {
       "enabled": true,
-      "storage": "local",
-      "backend_url": null
+      "storage": "remote",
+      "backend_url": "http://localhost:5000"
     },
     "timer": {
       "enabled": true,

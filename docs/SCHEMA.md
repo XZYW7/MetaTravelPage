@@ -1,259 +1,240 @@
-# Schema Documentation
+# Schema 文档
 
-This document provides detailed documentation for the `journey.schema.json` schema.
+本文档详细说明 `journey.schema.json` 的结构。
 
-## Overview
+## 概述
 
-The schema defines the structure for card-based journey/flow guide applications. It uses JSON Schema Draft-07.
+该 Schema 定义了卡片式旅程/流程指南应用的配置结构，使用 JSON Schema Draft-07。
 
-## Root Properties
+## 根属性
 
 ### schema_version
-- **Type**: `string`
-- **Required**: Yes
-- **Value**: `"1.0.0"`
-- **Description**: Schema version for compatibility management
+- **类型**：`string`
+- **必需**：是
+- **值**：`"1.0.0"`
+- **说明**：Schema 版本，用于兼容性管理
 
 ### app
-- **Type**: `object`
-- **Required**: Yes
-- **Description**: Application metadata and theme configuration
+- **类型**：`object`
+- **必需**：是
+- **说明**：应用元数据和主题配置
 
 #### app.title
-- **Type**: `string`
-- **Required**: Yes
-- **Description**: Application title displayed on cover and navigation
+- **类型**：`string`
+- **必需**：是
+- **说明**：应用标题，显示在封面和导航栏
 
 #### app.subtitle
-- **Type**: `string`
-- **Required**: No
-- **Description**: Application subtitle or tagline
+- **类型**：`string`
+- **必需**：否
+- **说明**：应用副标题或标语
 
 #### app.icon
-- **Type**: `string`
-- **Required**: No
-- **Description**: Emoji or icon identifier for the application
+- **类型**：`string`
+- **必需**：否
+- **说明**：应用图标（Emoji 或图标标识符）
 
 #### app.theme
-- **Type**: `object`
-- **Required**: No
-- **Description**: Visual theme configuration
+- **类型**：`object`
+- **必需**：否
+- **说明**：视觉主题配置
 
 ##### app.theme.primary
-- **Type**: `string`
-- **Pattern**: `^#[0-9A-Fa-f]{6}$`
-- **Description**: Primary accent color (hex)
+- **类型**：`string`
+- **格式**：十六进制颜色值（如 `#5BC0EB`）
+- **说明**：主色调
 
 ##### app.theme.secondary
-- **Type**: `string`
-- **Pattern**: `^#[0-9A-Fa-f]{6}$`
-- **Description**: Secondary accent color (hex)
+- **类型**：`string`
+- **格式**：十六进制颜色值
+- **说明**：次要色调
 
 ##### app.theme.dark_mode
-- **Type**: `boolean`
-- **Description**: Whether dark mode is enabled by default
+- **类型**：`boolean`
+- **说明**：是否默认启用深色模式
 
 #### app.date_range
-- **Type**: `object`
-- **Required**: No
-- **Description**: Date range for the journey/flow
+- **类型**：`object`
+- **必需**：否
+- **说明**：旅程/流程的日期范围
 
 ##### app.date_range.start
-- **Type**: `string`
-- **Format**: `date`
-- **Description**: Start date (YYYY-MM-DD)
+- **类型**：`string`
+- **格式**：`date`（YYYY-MM-DD）
+- **说明**：开始日期
 
 ##### app.date_range.end
-- **Type**: `string`
-- **Format**: `date`
-- **Description**: End date (YYYY-MM-DD)
+- **类型**：`string`
+- **格式**：`date`（YYYY-MM-DD）
+- **说明**：结束日期
 
 ### features
-- **Type**: `object`
-- **Required**: No
-- **Description**: Feature toggles and plugin configurations
+- **类型**：`object`
+- **必需**：否
+- **说明**：功能开关和插件配置
 
 #### features.diary
-- **Type**: `object`
-- **Description**: Diary/journal feature configuration
+- **类型**：`object`
+- **说明**：日记功能配置
 
-##### features.diary.enabled
-- **Type**: `boolean`
-- **Description**: Whether diary feature is enabled
-
-##### features.diary.storage
-- **Type**: `string`
-- **Enum**: `["local", "remote"]`
-- **Description**: Storage backend type
-
-##### features.diary.backend_url
-- **Type**: `string | null`
-- **Description**: Remote backend URL (null for local storage)
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| enabled | boolean | 是否启用日记功能 |
+| storage | string | 存储类型：`"local"` 或 `"remote"` |
+| backend_url | string\|null | 远程后端地址（本地存储时为 null） |
 
 #### features.timer
-- **Type**: `object`
-- **Description**: Timer/countdown plugin configuration
+- **类型**：`object`
+- **说明**：计时器插件配置
 
-##### features.timer.enabled
-- **Type**: `boolean`
-- **Description**: Whether timer feature is enabled
-
-##### features.timer.presets
-- **Type**: `array` of `integer`
-- **Description**: Timer preset values in minutes
-
-##### features.timer.label
-- **Type**: `string`
-- **Description**: Timer display label
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| enabled | boolean | 是否启用计时器 |
+| presets | array | 预设时间值（分钟） |
+| label | string | 计时器显示标签 |
 
 #### features.phrasebook
-- **Type**: `object`
-- **Description**: Phrasebook/audio playback plugin configuration
+- **类型**：`object`
+- **说明**：语音短语本插件配置
 
-##### features.phrasebook.enabled
-- **Type**: `boolean`
-- **Description**: Whether phrasebook feature is enabled
-
-##### features.phrasebook.language
-- **Type**: `string`
-- **Description**: Target language name
-
-##### features.phrasebook.audio_path
-- **Type**: `string`
-- **Description**: Path to audio files directory
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| enabled | boolean | 是否启用短语本 |
+| language | string | 目标语言名称 |
+| audio_path | string | 音频文件目录路径 |
 
 ### cards
-- **Type**: `array`
-- **Required**: Yes
-- **Min Items**: 1
-- **Description**: Array of card definitions
+- **类型**：`array`
+- **必需**：是
+- **最少项数**：1
+- **说明**：卡片定义数组
 
-## Card Types
+## 卡片类型
 
-### Cover Card
+### 封面卡片 (cover)
 
 ```json
 {
   "id": "cover",
   "type": "cover",
   "sort_index": 1,
-  "title": "Application Title",
-  "subtitle": "Application Subtitle",
+  "title": "应用标题",
+  "subtitle": "应用副标题",
   "icon": "✈️",
   "date_range": "2026.01.01 — 2026.12.31",
   "download_link": {
-    "text": "Download APK",
+    "text": "下载 APK",
     "url": "app.apk"
   }
 }
 ```
 
-### Standard Card
+### 标准卡片 (standard)
 
 ```json
 {
   "id": "day_1",
   "type": "standard",
   "sort_index": 1000,
-  "date": "Day 1",
-  "title": "First Day",
-  "subtitle": "Description",
+  "date": "第1天",
+  "title": "卡片标题",
+  "subtitle": "卡片副标题",
   "plugins": {
     "timer": {
       "enabled": true,
       "preset": 30,
-      "label": "Timer"
+      "label": "计时器"
     }
   },
   "sections": [...]
 }
 ```
 
-### Reference Card
+### 参考卡片 (reference)
 
 ```json
 {
   "id": "reference",
   "type": "reference",
   "sort_index": 90000001,
-  "title": "Quick Reference",
-  "subtitle": "Essential Information",
+  "title": "实用信息",
+  "subtitle": "随时翻看的备忘",
   "sections": [...]
 }
 ```
 
-## Section Types
+## Section 类型
 
-### Timeline Section
+### timeline（时间线）
 
 ```json
 {
   "type": "timeline",
-  "title": "Timeline Title",
+  "title": "时间线标题",
   "items": [
     {
       "time": "08:00",
-      "content": "Event description",
+      "content": "事件描述",
       "variant": "default|success|warning|danger"
     }
   ]
 }
 ```
 
-### Table Section
+### table（表格）
 
 ```json
 {
   "type": "table",
-  "title": "Table Title",
-  "headers": ["Column 1", "Column 2"],
+  "title": "表格标题",
+  "headers": ["列1", "列2"],
   "rows": [
-    ["Value 1", "Value 2"]
+    ["值1", "值2"]
   ]
 }
 ```
 
-### Info Box Section
+### info_box（提示框）
 
 ```json
 {
   "type": "info_box",
   "variant": "info|warning|danger|success",
-  "title": "Notice Title",
-  "content": "Notice content (supports HTML)"
+  "title": "提示标题",
+  "content": "提示内容（支持 HTML）"
 }
 ```
 
-### Checklist Section
+### checklist（清单）
 
 ```json
 {
   "type": "checklist",
-  "title": "Checklist Title",
-  "items": ["Item 1", "Item 2"]
+  "title": "清单标题",
+  "items": ["项目1", "项目2"]
 }
 ```
 
-### Expandable Section
+### expandable（可展开）
 
 ```json
 {
   "type": "expandable",
-  "title": "Expandable Title",
-  "content": "HTML content"
+  "title": "展开标题",
+  "content": "HTML 内容"
 }
 ```
 
-### Phrasebook Section
+### phrasebook（短语本）
 
 ```json
 {
   "type": "phrasebook",
-  "title": "Language Phrases",
+  "title": "语言短语",
   "phrases": [
     {
       "id": "phrase_1",
-      "中文": "Hello",
+      "中文": "你好",
       "外语": "Bonjour",
       "发音": "Bon-zhoor",
       "audio": "hello.mp3"
@@ -262,37 +243,39 @@ The schema defines the structure for card-based journey/flow guide applications.
 }
 ```
 
-## Variants
+## Variant 值
 
-### Timeline Item Variants
-- `default`: Normal events
-- `success`: Positive milestones
-- `warning`: Caution needed
-- `danger`: Critical alerts
+### 时间线 variant
+- `default`：普通事件
+- `success`：积极里程碑
+- `warning`：需要注意
+- `danger`：关键警告
 
-### Info Box Variants
-- `info`: General information
-- `warning`: Caution notices
-- `danger`: Critical warnings
-- `success`: Positive confirmations
+### 提示框 variant
+- `info`：一般信息
+- `warning`：注意事项
+- `danger`：严重警告
+- `success`：成功确认
 
-## Sort Index Guidelines
+## 排序索引规则
 
-Use increments of 1000 for flexibility:
-- Cover: `1`
-- First card: `1000`
-- Second card: `2000`
-- Reference: `90000001`
+使用 1000 的倍数以留出灵活性：
+- 封面：`1`
+- 第一个内容卡片：`1000`
+- 第二个内容卡片：`2000`
+- 参考卡片：`90000001`
 
-## Validation
+日期卡片会自动从日期计算排序值（如 "6月15日" → `6150`）。
 
-Use `core/validate.js` to validate configurations:
+## 校验
+
+使用 `core/validate.js` 校验配置：
 
 ```javascript
 const result = validateJourney(config);
 if (result.valid) {
-  console.log('Configuration is valid');
+  console.log('配置有效');
 } else {
-  console.error('Validation errors:', result.errors);
+  console.error('校验错误:', result.errors);
 }
 ```
