@@ -1,29 +1,33 @@
 {
   "schema_version": "1.0.0",
   "app": {
-    "title": "我的旅行指南",
-    "subtitle": "",
-    "icon": "✈️",
+    "title": "泰国旅行指南",
+    "subtitle": "曼谷 · 清迈 7日自由行",
+    "icon": "🇹🇭",
     "theme": {
       "primary": "#5BC0EB",
       "secondary": "#F5A9B8",
       "dark_mode": true
+    },
+    "date_range": {
+      "start": "2026-06-15",
+      "end": "2026-06-21"
     }
   },
   "features": {
     "diary": {
       "enabled": true,
-      "storage": "local",
-      "backend_url": null
+      "storage": "remote",
+      "backend_url": "http://localhost:5000"
     },
     "timer": {
-      "enabled": false,
+      "enabled": true,
       "presets": [15, 30, 45, 60],
       "label": "计时器"
     },
     "phrasebook": {
-      "enabled": false,
-      "language": "",
+      "enabled": true,
+      "language": "泰语",
       "audio_path": "assets/audio/"
     }
   },
@@ -32,39 +36,296 @@
       "id": "cover",
       "type": "cover",
       "sort_index": 1,
-      "title": "我的旅行指南",
-      "subtitle": "请编辑 config/journey.json 自定义内容",
-      "icon": "✈️"
+      "title": "泰国旅行指南",
+      "subtitle": "曼谷 · 清迈 7日自由行\n2026.06.15 — 2026.06.21",
+      "icon": "🇹🇭"
     },
     {
-      "id": "getting_started",
-      "type": "reference",
-      "sort_index": 90000001,
-      "title": "开始使用",
-      "subtitle": "快速上手指南",
+      "id": "preparation",
+      "type": "standard",
+      "sort_index": 2,
+      "date": "出发前",
+      "title": "行前准备",
+      "subtitle": "逐项核对，不要遗漏",
       "sections": [
+        {
+          "type": "table",
+          "title": "💰 预算参考",
+          "headers": ["项目", "预算", "备注"],
+          "rows": [
+            ["机票", "¥2,500", "往返含税"],
+            ["住宿", "¥2,800", "7晚均价¥400"],
+            ["餐饮", "¥1,400", "每天¥200"],
+            ["交通", "¥700", "打车+地铁+双条车"],
+            ["景点门票", "¥500", "大皇宫等"],
+            ["购物&其他", "¥1,000", "伴手礼等"],
+            ["合计", "¥8,900", "人均"]
+          ]
+        },
         {
           "type": "info_box",
           "variant": "info",
-          "title": "📋 如何自定义",
-          "content": "<p>编辑 <code>config/journey.json</code> 文件来定义你的旅行内容。</p><p>参考 <code>schema/journey.schema.json</code> 了解配置结构。</p><p>参考 <code>examples/thailand-travel/journey.json</code> 查看完整示例。</p>"
-        },
-        {
-          "type": "info_box",
-          "variant": "success",
-          "title": "🤖 使用 AI Agent 生成",
-          "content": "<p>将 <code>docs/AGENT_PROMPT.md</code> 的内容作为系统提示词，提供给 AI Agent（如 ChatGPT、Claude）。</p><p>然后提供你的旅行材料，Agent 会自动生成符合规范的 <code>journey.json</code> 配置。</p>"
+          "title": "📌 出发前必做",
+          "content": "① 办理签证（落地签或提前办）② 兑换泰铢（建议换5000泰铢现金）③ 购买泰国SIM卡或开通国际漫游④ 下载Grab、Google Maps离线地图⑤ 确认护照有效期6个月以上"
         },
         {
           "type": "checklist",
-          "title": "📝 配置清单",
+          "title": "📋 证件清单",
           "items": [
-            "编辑 journey.json 中的 app.title 和 app.subtitle",
-            "定义 cards 数组，添加行程卡片",
-            "如需短语本功能，添加音频文件到 assets/audio/",
-            "如需计时器功能，在 features.timer 中配置",
-            "启动服务器测试：start-server.bat"
+            "护照（有效期6个月以上）",
+            "签证（落地签/电子签）",
+            "机票行程单（打印+电子版）",
+            "酒店预订确认单",
+            "旅行保险单",
+            "护照复印件2份（分开存放）",
+            "2寸白底照片2张（落地签用）"
           ]
+        },
+        {
+          "type": "expandable",
+          "title": "🧳 行李清单",
+          "content": "<b>【衣物】</b>轻薄透气的夏装3-4套 · 防晒外套1件 · 泳衣 · 拖鞋+运动鞋 · 遮阳帽<br><br><b>【电子】</b>充电宝 · 转换插头（泰国两扁脚可用）· 自拍杆 · 防水手机袋<br><br><b>【日用】</b>防晒霜SPF50+ · 驱蚊液 · 肠胃药 · 创可贴 · 墨镜<br><br><b>【其他】</b>密封袋（装湿衣物）· 零食（飞机上吃）· 小锁（青旅用）"
+        }
+      ]
+    },
+    {
+      "id": "day_1",
+      "type": "standard",
+      "date": "6月15日 · 第1天",
+      "title": "抵达曼谷",
+      "subtitle": "杭州 → 曼谷 · 入住酒店",
+      "sections": [
+        {
+          "type": "timeline",
+          "items": [
+            {"time": "08:00 杭州萧山机场", "content": "办理登机、托运行李，建议提前3小时到达", "variant": "default"},
+            {"time": "11:30 起飞", "content": "飞行约4.5小时，机上可以提前填好入境卡", "variant": "default"},
+            {"time": "15:00 抵达素万那普机场", "content": "落地签通道排队 → 提交材料 → 入境检查 → 取行李", "variant": "success"},
+            {"time": "16:30 前往酒店", "content": "机场快线+打车到暹罗区域酒店，约1小时", "variant": "default"},
+            {"time": "18:00 入住酒店", "content": "放行李、休息、洗澡换衣服", "variant": "default"},
+            {"time": "19:30 晚餐", "content": "酒店附近找家本地餐厅，尝尝泰式炒河粉(Pad Thai)", "variant": "success"},
+            {"time": "21:00 逛夜市", "content": "去附近的夜市逛逛，买点水果和小吃", "variant": "default"}
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "warning",
+          "title": "⚠️ 入境小贴士",
+          "content": "落地签需要：护照 + 机票行程单 + 酒店预订单 + 2寸照片 + 签证费2000泰铢。排队可能较长，耐心等待。"
+        }
+      ]
+    },
+    {
+      "id": "day_2",
+      "type": "standard",
+      "date": "6月16日 · 第2天",
+      "title": "曼谷经典一日游",
+      "subtitle": "大皇宫 · 卧佛寺 · 湄南河",
+      "sections": [
+        {
+          "type": "timeline",
+          "items": [
+            {"time": "08:00 酒店早餐", "content": "吃饱喝足，今天要走很多路", "variant": "default"},
+            {"time": "09:00 大皇宫", "content": "曼谷必去景点！参观玉佛寺、大皇宫建筑群。注意：需穿长裤、有袖上衣", "variant": "success"},
+            {"time": "11:30 卧佛寺", "content": "看最大的卧佛像，可以体验泰式按摩（260泰铢/小时）", "variant": "default"},
+            {"time": "13:00 午餐", "content": "卧佛寺附近吃船面，推荐Pad Thai", "variant": "default"},
+            {"time": "14:30 湄南河游船", "content": "坐游船游览湄南河两岸风光，经过郑王庙等景点", "variant": "default"},
+            {"time": "17:00 返回酒店", "content": "休息一下，避开最热的时段", "variant": "default"},
+            {"time": "19:00 拉差达火车夜市", "content": "网红夜市！各种小吃、手工艺品、拍照打卡", "variant": "success"}
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "danger",
+          "title": "🚫 大皇宫着装要求",
+          "content": "必须穿长裤或过膝裙，有袖上衣（不能穿吊带/背心），不能穿拖鞋。不符合要求会被拒绝入场！"
+        }
+      ]
+    },
+    {
+      "id": "day_3",
+      "type": "standard",
+      "date": "6月17日 · 第3天",
+      "title": "曼谷购物日",
+      "subtitle": "暹罗商圈 · 水上市场",
+      "sections": [
+        {
+          "type": "timeline",
+          "items": [
+            {"time": "09:00 暹罗商圈", "content": "Siam Paragon、CentralWorld、MBK等商场集中区域", "variant": "default"},
+            {"time": "12:00 午餐", "content": "商场美食广场", "variant": "default"},
+            {"time": "14:00 水上市场半日游", "content": "报团去丹嫩沙多水上市场，体验船上买卖的独特风情", "variant": "success"},
+            {"time": "18:00 返回市区", "content": "路上可以休息", "variant": "default"},
+            {"time": "19:30 晚餐", "content": "去考山路吃街头小吃，感受热闹氛围", "variant": "default"}
+          ]
+        },
+        {
+          "type": "table",
+          "title": "🛍️ 购物推荐",
+          "headers": ["商品", "推荐地点", "参考价格"],
+          "rows": [
+            ["护肤品/化妆品", "Boots、屈臣氏", "比国内便宜30-50%"],
+            ["零食特产", "7-11、Big C", "小老板海苔、Bento鱿鱼片"],
+            ["泰丝制品", "Jim Thompson", "围巾¥200-500"],
+            ["乳胶枕头", "专卖店", "¥200-400"],
+            ["青草药膏", "药妆店", "¥10-20/瓶"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day_4",
+      "type": "standard",
+      "date": "6月18日 · 第4天",
+      "title": "曼谷→清迈",
+      "subtitle": "飞行 · 入住古城民宿",
+      "sections": [
+        {
+          "type": "timeline",
+          "items": [
+            {"time": "08:00 酒店退房", "content": "收拾行李", "variant": "default"},
+            {"time": "09:30 前往廊曼机场", "content": "打车约40分钟，建议提前2小时到达", "variant": "default"},
+            {"time": "12:00 飞往清迈", "content": "飞行约1小时", "variant": "default"},
+            {"time": "13:00 抵达清迈", "content": "取行李，打车前往古城区域的民宿", "variant": "success"},
+            {"time": "14:30 入住民宿", "content": "放下行李，休息一下", "variant": "default"},
+            {"time": "16:00 古城漫步", "content": "租辆自行车或步行逛古城，看看寺庙和街景", "variant": "default"},
+            {"time": "18:30 周日夜市", "content": "如果赶上周日，塔佩门周日夜市是清迈最大的夜市！", "variant": "success"},
+            {"time": "21:00 做按摩", "content": "古城内按摩店很多，泰式按摩约200-300泰铢/小时", "variant": "default"}
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "info",
+          "title": "✈️ 清迈交通",
+          "content": "古城内步行或骑车即可。出城可以坐红色双条车（20-30泰铢/人），或者用Grab叫车。"
+        }
+      ]
+    },
+    {
+      "id": "day_5",
+      "type": "standard",
+      "date": "6月19日 · 第5天",
+      "title": "清迈寺庙之旅",
+      "subtitle": "双龙寺 · 帕辛寺 · 契迪龙寺",
+      "sections": [
+        {
+          "type": "timeline",
+          "items": [
+            {"time": "07:00 早起", "content": "趁凉快早点出发，避开中午的高温", "variant": "default"},
+            {"time": "08:00 双龙寺(素贴山)", "content": "清迈最著名的寺庙，可以俯瞰整个清迈城。爬306级台阶或坐缆车", "variant": "success"},
+            {"time": "10:30 返回古城", "content": "下山后去古城内的寺庙", "variant": "default"},
+            {"time": "11:00 帕辛寺", "content": "清迈最古老、最重要的寺庙之一", "variant": "default"},
+            {"time": "12:00 午餐", "content": "古城内吃Khao Soi（清迈咖喱面）", "variant": "default"},
+            {"time": "14:00 契迪龙寺", "content": "看大佛塔，非常壮观", "variant": "default"},
+            {"time": "16:00 宁曼路", "content": "文艺小清新街区，咖啡店、甜品店、创意小店", "variant": "default"},
+            {"time": "19:00 晚餐", "content": "吃清迈烤鸡，本地人最爱", "variant": "success"}
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "warning",
+          "title": "⚠️ 寺庙礼仪",
+          "content": "进入寺庙要脱鞋，着装要保守（遮盖肩膀和膝盖），女性不能触碰僧人。拍照前注意是否有禁止标志。"
+        }
+      ]
+    },
+    {
+      "id": "day_6",
+      "type": "standard",
+      "date": "6月20日 · 第6天",
+      "title": "清迈周边游",
+      "subtitle": "大象营 · 夜间动物园",
+      "sections": [
+        {
+          "type": "timeline",
+          "items": [
+            {"time": "08:00 出发去大象营", "content": "报半日团，车程约1小时", "variant": "default"},
+            {"time": "09:30 大象营体验", "content": "喂大象、给大象洗澡、学习大象保护知识", "variant": "success"},
+            {"time": "12:30 午餐", "content": "营地内用餐，通常包含在团费内", "variant": "default"},
+            {"time": "14:00 返回清迈", "content": "路上休息，回民宿洗澡换衣服", "variant": "default"},
+            {"time": "16:00 自由活动", "content": "可以去做SPA、逛市场、或者在咖啡店发呆", "variant": "default"},
+            {"time": "18:00 夜间动物园", "content": "清迈夜间动物园，可以近距离看动物", "variant": "success"},
+            {"time": "21:30 返回民宿", "content": "收拾行李，明天要回程了", "variant": "default"}
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "info",
+          "title": "🐘 大象营选择",
+          "content": "推荐选择保护型营地，不骑象、不表演，更人道也更有趣。"
+        }
+      ]
+    },
+    {
+      "id": "day_7",
+      "type": "standard",
+      "date": "6月21日 · 第7天",
+      "title": "返程",
+      "subtitle": "清迈 → 曼谷 → 杭州",
+      "sections": [
+        {
+          "type": "timeline",
+          "items": [
+            {"time": "08:00 最后的早餐", "content": "在古城吃最后一顿泰式早餐", "variant": "default"},
+            {"time": "09:00 买伴手礼", "content": "去瓦洛洛市场买芒果干、榴莲干等特产", "variant": "default"},
+            {"time": "11:00 前往机场", "content": "打车去清迈国际机场，约20分钟", "variant": "default"},
+            {"time": "13:00 飞往曼谷", "content": "国内转机，约1小时", "variant": "default"},
+            {"time": "15:00 转机", "content": "在曼谷素万那普机场转机，逛免税店", "variant": "default"},
+            {"time": "18:00 飞往杭州", "content": "飞行约4.5小时", "variant": "default"},
+            {"time": "22:30 抵达杭州", "content": "入境、取行李、回家！", "variant": "success"}
+          ]
+        },
+        {
+          "type": "checklist",
+          "title": "🧳 返程清单",
+          "items": [
+            "护照和登机牌",
+            "伴手礼和特产",
+            "充电宝和电子设备",
+            "检查酒店房间无遗漏物品",
+            "提前3小时到机场"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reference",
+      "type": "reference",
+      "sort_index": 90000001,
+      "title": "实用信息",
+      "subtitle": "随时翻看的备忘",
+      "sections": [
+        {
+          "type": "table",
+          "title": "📅 行程总览",
+          "headers": ["日期", "行程", "住宿"],
+          "rows": [
+            ["6月15日", "抵达曼谷", "曼谷酒店"],
+            ["6月16日", "大皇宫·卧佛寺·夜市", "曼谷酒店"],
+            ["6月17日", "购物·水上市场", "曼谷酒店"],
+            ["6月18日", "飞往清迈·古城", "清迈民宿"],
+            ["6月19日", "寺庙之旅", "清迈民宿"],
+            ["6月20日", "大象营·夜间动物园", "清迈民宿"],
+            ["6月21日", "返程", "飞机上"]
+          ]
+        },
+        {
+          "type": "phrasebook",
+          "title": "🇹🇭 常用泰语",
+          "phrases": [
+            {"id": "khob_khun", "中文": "谢谢", "外语": "ขอบคุณ", "发音": "Khob khun", "audio": "khob_khun.mp3"},
+            {"id": "hong_nam", "中文": "洗手间在哪", "外语": "ห้องน้ำ", "发音": "Hong nam", "audio": "hong_nam.mp3"},
+            {"id": "tao_rai", "中文": "多少钱", "外语": "เท่าไหร่", "发音": "Tao rai", "audio": "jep.mp3"},
+            {"id": "jep", "中文": "疼", "外语": "เจ็บ", "发音": "Jep", "audio": "jep.mp3"},
+            {"id": "aroy", "中文": "好吃", "外语": "อร่อย", "发音": "A-roy", "audio": "ya.mp3"},
+            {"id": "chuay_duay", "中文": "救命", "外语": "ช่วยด้วย", "发音": "Chuay duay", "audio": "chuay_duay.mp3"}
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "warning",
+          "title": "⚠️ 注意事项",
+          "content": "① 泰国是佛教国家，尊重宗教习俗 ② 不要摸别人的头 ③ 用右手递东西 ④ 进寺庙要脱鞋 ⑤ 注意防晒和补水 ⑥ 贵重物品随身携带"
         }
       ]
     }

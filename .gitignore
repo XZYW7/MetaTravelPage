@@ -24,6 +24,6 @@ build/
 .env
 .env.local
 
-# Runtime data (user-generated)
-diaries/
+# Runtime data (user-generated) - 仅在 example 分支保留
+# diaries/
 data/images/
