@@ -49,8 +49,8 @@ async function initApp() {
       <div class="card" style="display:flex;align-items:center;justify-content:center;">
         <div style="text-align:center;color:var(--text-dim);">
           <p style="font-size:48px;margin-bottom:16px;">⚠️</p>
-          <p style="font-size:18px;margin-bottom:8px;">Failed to load configuration</p>
-          <p style="font-size:14px;">Please check config/journey.json</p>
+          <p style="font-size:18px;margin-bottom:8px;">加载配置失败</p>
+          <p style="font-size:14px;">请检查 config/journey.json 文件</p>
         </div>
       </div>
     `;
@@ -153,7 +153,7 @@ function createCoverCard(card) {
       ${card.date_range ? `<br>${card.date_range}` : ''}
       ${downloadHtml}
     </div>
-    <div class="cover-hint">← Swipe to navigate →</div>
+    <div class="cover-hint">← 左右滑动切换 →</div>
   `;
   
   return div;

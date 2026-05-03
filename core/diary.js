@@ -53,7 +53,7 @@ function openGlobalDiary(date) {
 
     globalDiaryEditor = new Quill(editorDiv, {
       theme: 'snow',
-      placeholder: 'Write your diary...',
+      placeholder: '记录今天发生的事...',
       modules: {
         toolbar: {
           container: [
@@ -275,6 +275,6 @@ function injectDiaryToCard(cardOrIdx, date) {
   
   const storage = getStorageAdapter();
   storage.getDiary(date).then(data => {
-    diaryDiv.innerHTML = data.content || '<p style="color:var(--text-dim)">No diary yet</p>';
+    diaryDiv.innerHTML = data.content || '<p style="color:var(--text-dim)">暂无日记</p>';
   });
 }
