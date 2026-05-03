@@ -1,0 +1,528 @@
+{
+  "schema_version": "1.0.0",
+  "app": {
+    "title": "Thailand Travel Guide",
+    "subtitle": "Complete Itinerary for Your Journey",
+    "icon": "🇹🇭",
+    "theme": {
+      "primary": "#5BC0EB",
+      "secondary": "#F5A9B8",
+      "dark_mode": true
+    },
+    "date_range": {
+      "start": "2026-04-21",
+      "end": "2026-06-07"
+    }
+  },
+  "features": {
+    "diary": {
+      "enabled": true,
+      "storage": "local",
+      "backend_url": null
+    },
+    "timer": {
+      "enabled": true,
+      "presets": [15, 30, 45, 60],
+      "label": "Timer"
+    },
+    "phrasebook": {
+      "enabled": true,
+      "language": "Thai",
+      "audio_path": "assets/audio/"
+    }
+  },
+  "cards": [
+    {
+      "id": "cover",
+      "type": "cover",
+      "sort_index": 1,
+      "title": "Thailand Travel Guide",
+      "subtitle": "Complete Itinerary for Your Journey\n2026.04.21 — 2026.06.07",
+      "icon": "🇹🇭"
+    },
+    {
+      "id": "preparation",
+      "type": "standard",
+      "sort_index": 2,
+      "date": "Before Departure",
+      "title": "Preparation Checklist",
+      "subtitle": "Everything You Need to Prepare",
+      "sections": [
+        {
+          "type": "table",
+          "title": "💰 Budget Preparation",
+          "headers": ["Item", "Amount", "Method"],
+          "rows": [
+            ["Translation Fee", "6,000 THB", "Cash/Alipay"],
+            ["Psychiatric Consultation", "3,950 THB", "Cash"],
+            ["Daily Expenses", "15,000-20,000 THB", "Cash + Card"],
+            ["Emergency Fund", "10,000 THB", "Cash"]
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "info",
+          "title": "📌 Pre-departure Actions",
+          "content": "Go to the bank to exchange enough Thai Baht → Confirm your bank card is enabled for international use → Confirm Alipay/WeChat is linked"
+        },
+        {
+          "type": "checklist",
+          "title": "📋 Document Checklist",
+          "items": [
+            "Passport (valid for 6+ months)",
+            "Psychiatric doctor's certificate (original + 2 copies)",
+            "Medical permission certificate (if applicable)",
+            "Flight confirmation (printed + digital)",
+            "Hotel booking confirmation (printed + digital)",
+            "Clinic appointment confirmation",
+            "Physical examination report",
+            "Passport copies 2-3 copies (store separately)"
+          ]
+        },
+        {
+          "type": "expandable",
+          "title": "Recommended Items to Bring",
+          "content": "<ul><li><b>Disposable underwear (21+ pieces)</b>: Post-surgery you'll have tissue fluid and can't wash underwear yourself.</li><li><b>Lidocaine gel</b>: Essential for pain relief during dilation.</li><li><b>Lubricant applicator</b>: Keep extras, they're easy to lose.</li><li><b>Night pads/liquid sanitary pads</b>: Much more comfortable than regular pads.</li><li><b>Standing mirror with light</b>: For dilation and cleaning while in bed.</li><li><b>25mm pump head</b>: Attach to iodine bottle for easy dispensing.</li><li><b>Scissors</b>: For opening delivery food, pad packages.</li><li><b>O-shaped/U-shaped cushion</b>: <span class=\"highlight-danger\">【Life-saving】</span>Absolute must for flights and car rides to prevent wound pressure.</li></ul>"
+        }
+      ]
+    },
+    {
+      "id": "day_1",
+      "type": "standard",
+      "sort_index": 3,
+      "date": "Day 1",
+      "title": "Flight Day",
+      "subtitle": "Departure → Transit → Arrival",
+      "sections": [
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "time": "05:00 Wake up",
+              "content": "Simple breakfast (bread + milk), final check of passport/wallet/phone/power bank/neck pillow",
+              "variant": "default"
+            },
+            {
+              "time": "05:30 Depart",
+              "content": "Take taxi to airport, approximately 45-60 minutes",
+              "variant": "default"
+            },
+            {
+              "time": "06:30 Arrive at airport",
+              "content": "Check-in → Bag drop → Security check",
+              "variant": "default"
+            },
+            {
+              "time": "08:00 Flight departs",
+              "content": "Flight approximately 2h40m. Air conditioning is cold, bring a jacket",
+              "variant": "success"
+            },
+            {
+              "time": "10:40 Arrive at transit",
+              "content": "Follow Transfer signs, no need to go through immigration. Find next gate → restroom → wait",
+              "variant": "default"
+            },
+            {
+              "time": "12:00 Connecting flight",
+              "content": "Flight approximately 3h. Note time difference: Thailand is 1 hour behind Beijing time",
+              "variant": "success"
+            },
+            {
+              "time": "14:00 Arrive at destination",
+              "content": "Follow Arrivals → Immigration check. Purpose: 'Medical treatment'. How long: 'About 6 weeks'",
+              "variant": "default"
+            }
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "warning",
+          "title": "⚠️ Immigration Tips",
+          "content": "Stay calm, smile, keep answers concise. If language is a barrier, show your printed itinerary."
+        }
+      ]
+    },
+    {
+      "id": "day_2",
+      "type": "standard",
+      "sort_index": 4,
+      "date": "Day 2",
+      "title": "Consultation Day",
+      "subtitle": "Consultation · Examination · Documents",
+      "sections": [
+        {
+          "type": "info_box",
+          "variant": "success",
+          "title": "💧 Morning Focus",
+          "content": "<p>• <b>Eat a good breakfast + drink lots of water:</b> You'll need to do a urine test at the clinic!</p><p class=\"highlight\">⚠️ Before leaving, check your belongings:</p><ul><li><b>Passport original</b> (extremely important)</li><li><b>Psychiatric diagnosis certificate</b></li><li><b>Translation fee</b></li></ul>"
+        },
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "time": "09:30 Consultation",
+              "content": "Translator present. Doctor will ask about surgical expectations, health status, medication history. Physical examination and surgical plan discussion.",
+              "variant": "default"
+            },
+            {
+              "time": "After consultation",
+              "content": "Blood test + urine test. Routine blood, coagulation, liver/kidney function, infectious disease screening",
+              "variant": "default"
+            },
+            {
+              "time": "Sign consent forms",
+              "content": "Translator will explain each item. Ask questions if you have any doubts",
+              "variant": "default"
+            },
+            {
+              "time": "12:00 Psychiatric consultation",
+              "content": "Two psychiatrists will interview you separately (about 30 minutes each). Confirm gender dysphoria diagnosis + surgical intent + psychological state",
+              "variant": "default"
+            },
+            {
+              "time": "14:00 Pre-surgery examination",
+              "content": "Chest X-ray + other routine pre-surgery tests, approximately 1 hour",
+              "variant": "default"
+            },
+            {
+              "time": "15:00 Return to hotel",
+              "content": "All tests normal → Report to family",
+              "variant": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day_3",
+      "type": "standard",
+      "sort_index": 5,
+      "date": "Day 3",
+      "title": "Rest Day",
+      "subtitle": "Final Preparation Before Surgery",
+      "sections": [
+        {
+          "type": "info_box",
+          "variant": "danger",
+          "title": "🚫 Today's Diet Rules",
+          "content": "<span class=\"highlight-danger\">Only eat light, easily digestible food:</span> Porridge (no meat), yogurt, jelly, juice<br><br><span class=\"highlight-danger\">Absolutely avoid:</span> Meat, fruits (with fiber), vegetables, any solid hard-to-digest food"
+        },
+        {
+          "type": "info_box",
+          "variant": "danger",
+          "title": "⚠️ Critical Warning",
+          "content": "If the first bowel movement after surgery is dry, it can easily cause severe tearing or heavy bleeding. <span class=\"highlight-danger\">Make sure to buy fiber supplements or aloe capsules in advance!</span>"
+        }
+      ]
+    },
+    {
+      "id": "day_4",
+      "type": "standard",
+      "sort_index": 6,
+      "date": "Day 4",
+      "title": "Surgery Day",
+      "subtitle": "Hospital",
+      "sections": [
+        {
+          "type": "info_box",
+          "variant": "danger",
+          "title": "🚫 06:00 Absolute fasting",
+          "content": "Cannot eat anything, cannot drink any water. Can rinse mouth but don't swallow. This is anesthesia safety requirement, must be strictly followed."
+        },
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "time": "05:30 Wake up",
+              "content": "Brush teeth (don't swallow water), use restroom, change into loose clothing",
+              "variant": "default"
+            },
+            {
+              "time": "07:00 Go to hospital",
+              "content": "Bring passport and small backpack downstairs, driver takes you to hospital",
+              "variant": "default"
+            },
+            {
+              "time": "08:00 Arrive & register",
+              "content": "Follow guide to registration, use appointment and passport, measure height and weight",
+              "variant": "default"
+            },
+            {
+              "time": "11:00 Enema",
+              "content": "Nurse will perform enema to clear bowel again",
+              "variant": "default"
+            },
+            {
+              "time": "13:30 Operating room",
+              "content": "Anesthesiologist confirms identity, IV anesthesia, count down from 10... then nothing",
+              "variant": "danger"
+            },
+            {
+              "time": "19:00 Out of surgery",
+              "content": "Surgery complete. May feel extremely cold/hot/numb/pain when waking from anesthesia. Doctor will visit to say surgery was successful.",
+              "variant": "success"
+            }
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "success",
+          "title": "💪 Before Surgery",
+          "content": "Deep breath: Inhale 4 seconds → Hold 4 seconds → Exhale 4 seconds. You're ready. This is the path you've chosen."
+        }
+      ]
+    },
+    {
+      "id": "day_5",
+      "type": "standard",
+      "sort_index": 7,
+      "date": "Day 5 - Day 9",
+      "title": "Hospital Recovery",
+      "subtitle": "5 Nights in Hospital",
+      "sections": [
+        {
+          "type": "expandable",
+          "title": "📅 Day 1 (Day 5) — Bed Rest",
+          "content": "<p>Doctor checks dressings and drainage tubes in the morning.</p><p><span class=\"highlight\">Today's tasks:</span></p><ul class=\"check-list\"><li>Do 10 deep breaths every hour (prevent lung complications)</li><li><b>Force yourself to drink 2-3 liters of water daily</b></li><li>Move limbs in bed (prevent blood clots)</li></ul><p>Diet: Clear liquids (rice water, clear soup, juice)</p>"
+        },
+        {
+          "type": "expandable",
+          "title": "📅 Day 2 (Day 6) — First time out of bed!",
+          "content": "<p>After doctor approves, get out of bed.</p><p><span class=\"highlight\">Steps:</span> Sit up in bed for a few minutes → Sit on edge of bed for a few minutes → Stand with nurse's help → Walk slowly holding wall</p><p><span class=\"highlight\">Goal:</span> Walk 2-3 times after meals, 5-10 minutes each</p>"
+        },
+        {
+          "type": "expandable",
+          "title": "📅 Day 3 (Day 7) — Gradual improvement",
+          "content": "<p>Pain continues to decrease, can walk to bathroom yourself. Appetite improves.</p><p>Drainage tube may be removed. Starting to feel bored — this is a good sign!</p>"
+        },
+        {
+          "type": "expandable",
+          "title": "📅 Day 4 (Day 8) — Packing removal",
+          "content": "<p><span class=\"highlight-danger\">Most uncomfortable procedure during hospital stay:</span> Doctor removes internal dressing.</p><p>Strong stretching sensation and stinging, about 5-10 minutes. Deep breath, try to relax.</p><p>After removal, feel much better. Doctor teaches post-surgery cleaning.</p>"
+        },
+        {
+          "type": "expandable",
+          "title": "📅 Day 5 (Day 9) — Discharge!",
+          "content": "<p>Doctor confirms everything is normal → Sign discharge papers → Get medications and go home.</p><p><span class=\"highlight\">Discharge medications:</span> Painkillers · Antibiotics (7-10 days) · Topical ointment · Stool softener</p><p class=\"warning-text\">⚠️ Note: Still have catheter when discharged, still absolutely cannot shower, can only use wet wipes</p>"
+        }
+      ]
+    },
+    {
+      "id": "day_10",
+      "type": "standard",
+      "sort_index": 8,
+      "date": "Day 10 - Day 47",
+      "title": "Post-Surgery Care",
+      "subtitle": "Hotel · The Real Challenge",
+      "sections": [
+        {
+          "type": "info_box",
+          "variant": "success",
+          "title": "📅 Day 17 — First Follow-up",
+          "content": "<p><span class=\"highlight\">Most important follow-up:</span></p><p>① Wound check ② Catheter removal ③ Try urinating ④ Dilation teaching</p><p>Catheter removal: Slight pulling sensation, doesn't hurt. After removal, try urinating. First time may have burning sensation.</p><p class=\"highlight\">🎉 After catheter removal, can finally take real showers!</p>"
+        },
+        {
+          "type": "table",
+          "title": "Dilation + Cleaning Schedule",
+          "headers": ["Time", "Content"],
+          "rows": [
+            ["Morning", "Dilation → Cleaning"],
+            ["Afternoon (before 4pm)", "Dilation → Cleaning"],
+            ["Evening", "Cleaning only"]
+          ]
+        },
+        {
+          "type": "info_box",
+          "variant": "danger",
+          "title": "⚠️ Two Iron Rules",
+          "content": "1. <span class=\"highlight-danger\">Absolutely do not dilate after 4pm!</span> (Clinic closes at 5pm, if something goes wrong there's no time to handle it)<br>2. <span class=\"highlight-danger\">Do not try to touch anything for 2 weeks after surgery!</span> (Very easy to cause complications)"
+        },
+        {
+          "type": "expandable",
+          "title": "📅 Day 24 — Second Follow-up",
+          "content": "<p>Doctor checks wound → Teaches cleaning → Points out clitoris location → Evaluates dilation progress</p><p><span class=\"highlight-success\">Issues:</span> Fit-to-fly letter + Surgery Certificate</p><p>These two documents are very important for returning home and subsequent document changes!</p>"
+        }
+      ]
+    },
+    {
+      "id": "day_48",
+      "type": "standard",
+      "sort_index": 9,
+      "date": "Day 48",
+      "title": "Return Home",
+      "subtitle": "Departure → Transit → Home",
+      "sections": [
+        {
+          "type": "section",
+          "title": "🧳 Luggage Checklist",
+          "items": [
+            "Passport + Fit-to-fly letter + Surgery Certificate",
+            "Discharge summary + medication list",
+            "Medications (painkillers, remaining antibiotics, etc.)",
+            "Dilators — bring back home to continue using",
+            "Lubricant",
+            "Personal items + shopping souvenirs"
+          ]
+        },
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "time": "Go to airport",
+              "content": "Clinic arranges car to take you. Arrive 3 hours early recommended.",
+              "variant": "default"
+            },
+            {
+              "time": "Request wheelchair service",
+              "content": "Show fit-to-fly letter at airline counter, can request free wheelchair.",
+              "variant": "default"
+            },
+            {
+              "time": "During flight",
+              "content": "<span class=\"highlight\">Stand up and walk every 2-3 hours</span> (prevent blood clots) · Drink lots of water · Wear loose clothing",
+              "variant": "default"
+            },
+            {
+              "time": "Arrive home",
+              "content": "Immigration → Collect luggage → Taxi home → Take a good shower → Eat a longed-for meal → Report safe → Good sleep",
+              "variant": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "post_return",
+      "type": "standard",
+      "sort_index": 10,
+      "date": "After Return",
+      "title": "Follow-up Matters",
+      "subtitle": "Recovery · Documents · Adaptation",
+      "sections": [
+        {
+          "type": "table",
+          "title": "💊 Dilation Frequency (Long-term)",
+          "headers": ["Phase", "Frequency", "Duration"],
+          "rows": [
+            ["1-3 months post-op", "2-3 times daily", "10-15 minutes"],
+            ["3-6 months post-op", "1-2 times daily", "10 minutes"],
+            ["6-12 months post-op", "Once daily", "5-10 minutes"],
+            ["1+ year post-op", "3-4 times weekly", "5-10 minutes"]
+          ]
+        },
+        {
+          "type": "checklist",
+          "title": "🚨 When to Contact Clinic",
+          "items": [
+            "Temperature over 38°C",
+            "Heavy bleeding from wound",
+            "Wound redness increasing or pus",
+            "Severe pain (painkillers ineffective)",
+            "Unable to urinate",
+            "Unable to insert dilator"
+          ]
+        },
+        {
+          "type": "expandable",
+          "title": "Document Changes",
+          "content": "<p><span class=\"highlight\">Materials:</span> Surgery Certificate (notarized translation) · Fit-to-fly letter · Passport · Household registration · ID card original · Hospital gender change certificate</p><p><span class=\"highlight\">Process:</span> Hospital gender assessment → Get medical certificate → Bring to local police station for change → Change household registration gender & name → Re-issue ID card</p>"
+        }
+      ]
+    },
+    {
+      "id": "reference",
+      "type": "reference",
+      "sort_index": 90000001,
+      "title": "Quick Reference",
+      "subtitle": "Essential Information",
+      "sections": [
+        {
+          "type": "table",
+          "title": "📅 Key Dates",
+          "headers": ["Date", "Event"],
+          "rows": [
+            ["Day 1", "Departure"],
+            ["Day 2", "Consultation + Examination"],
+            ["Day 3", "Preparation Day"],
+            ["Day 4", "Surgery Day"],
+            ["Day 17", "First Follow-up"],
+            ["Day 24", "Second Follow-up"],
+            ["Day 48", "Return Home"]
+          ]
+        },
+        {
+          "type": "phrasebook",
+          "title": "🇹🇭 Essential Thai Phrases",
+          "phrases": [
+            {
+              "id": "khob_khun",
+              "中文": "Thank you",
+              "外语": "ขอบคุณ",
+              "发音": "Khob khun",
+              "audio": "khob_khun.mp3"
+            },
+            {
+              "id": "jep",
+              "中文": "Pain",
+              "外语": "เจ็บ",
+              "发音": "Jep",
+              "audio": "jep.mp3"
+            },
+            {
+              "id": "lueat_ok",
+              "中文": "Bleeding",
+              "外语": "เลือดออก",
+              "发音": "Lueat ok",
+              "audio": "lueat_ok.mp3"
+            },
+            {
+              "id": "mi_khai",
+              "中文": "Fever",
+              "外语": "มีไข้",
+              "发音": "Mi khai",
+              "audio": "mi_khai.mp3"
+            },
+            {
+              "id": "ya",
+              "中文": "Medicine",
+              "外语": "ยา",
+              "发音": "Ya",
+              "audio": "ya.mp3"
+            },
+            {
+              "id": "rong_phayaban",
+              "中文": "Hospital",
+              "外语": "โรงพยาบาล",
+              "发音": "Rong phayaban",
+              "audio": "rong_phayaban.mp3"
+            },
+            {
+              "id": "hong_nam",
+              "中文": "Restroom",
+              "外语": "ห้องน้ำ",
+              "发音": "Hong nam",
+              "audio": "hong_nam.mp3"
+            },
+            {
+              "id": "chuay_duay",
+              "中文": "Help",
+              "外语": "ช่วยด้วย",
+              "发音": "Chuay duay",
+              "audio": "chuay_duay.mp3"
+            }
+          ]
+        },
+        {
+          "type": "checklist",
+          "title": "📞 Important Contacts",
+          "items": [
+            "Local Embassy",
+            "Translator contact",
+            "Clinic contact",
+            "Hotel front desk"
+          ]
+        }
+      ]
+    }
+  ]
+}
