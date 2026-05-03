@@ -161,8 +161,8 @@ function sortCards() {
   const cards = Array.from(track.querySelectorAll('.card'));
   
   cards.sort((a, b) => {
-    const aIndex = parseInt(a.dataset.sortIndex) || 50000;
-    const bIndex = parseInt(b.dataset.sortIndex) || 50000;
+    const aIndex = parseInt(a.dataset.sortIndex) || 999999;
+    const bIndex = parseInt(b.dataset.sortIndex) || 999999;
     return aIndex - bIndex;
   });
   
