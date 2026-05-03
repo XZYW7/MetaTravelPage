@@ -23,9 +23,13 @@ async function loadAllDiaries() {
 function restoreDiaries() {
   const cards = getCards();
   cards.forEach((card) => {
-    const date = card.dataset.date;
-    if (date && diaryDates.has(date)) {
-      injectDiaryToCard(card, date);
+    const cardDate = card.dataset.date;
+    if (!cardDate) return;
+    for (const diaryDate of diaryDates) {
+      if (datesMatch(cardDate, diaryDate)) {
+        injectDiaryToCard(card, diaryDate);
+        break;
+      }
     }
   });
 }
@@ -145,7 +149,7 @@ function parseDateForSort(dateStr, isDiary = false) {
     return isDiary ? base * 10 + 1 : base * 10;
   }
   
-  // Parse "5月3日" format
+  // Parse "5月3日" or "6月15日 · 第1天" format
   const monthDayMatch = dateStr.match(/(\d+)月(\d+)日/);
   if (monthDayMatch) {
     base = parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2]);
@@ -153,6 +157,16 @@ function parseDateForSort(dateStr, isDiary = false) {
   }
   
   return 500000;
+}
+
+function extractDateKey(dateStr) {
+  const match = dateStr.match(/(\d+)月(\d+)日/);
+  if (match) return match[1] + '月' + match[2] + '日';
+  return dateStr;
+}
+
+function datesMatch(date1, date2) {
+  return extractDateKey(date1) === extractDateKey(date2);
 }
 
 function sortCards() {
@@ -170,8 +184,8 @@ function sortCards() {
 
 function createDiaryCard(date, content) {
   const cards = getCards();
-  const existingDates = new Set(cards.map(c => c.dataset.date).filter(Boolean));
-  if (existingDates.has(date)) return;
+  const existingCard = cards.find(c => datesMatch(c.dataset.date, date));
+  if (existingCard) return;
 
   const card = document.createElement('div');
   card.className = 'card';
@@ -198,7 +212,7 @@ function openDiaryEditor(date) {
   const cards = getCards();
   let idx = current;
   for (let i = 0; i < cards.length; i++) {
-    if (cards[i].dataset.date === date) { idx = i; break; }
+    if (datesMatch(cards[i].dataset.date, date)) { idx = i; break; }
   }
   current = idx;
   updateView();
@@ -209,15 +223,15 @@ function viewDiary(date) {
   const cards = getCards();
   let idx = current;
   for (let i = 0; i < cards.length; i++) {
-    if (cards[i].dataset.date === date) { idx = i; break; }
+    if (datesMatch(cards[i].dataset.date, date)) { idx = i; break; }
   }
 
-  const existingDates = new Set(cards.map(c => c.dataset.date).filter(Boolean));
   current = idx;
   updateView();
 
-  if (existingDates.has(date)) {
-    injectDiaryToCard(cards[idx], date);
+  const existingCard = cards.find(c => datesMatch(c.dataset.date, date));
+  if (existingCard) {
+    injectDiaryToCard(existingCard, date);
   } else {
     const storage = getStorageAdapter();
     storage.getDiary(date).then(data => {
@@ -231,8 +245,8 @@ function viewDiary(date) {
 function injectDiaryToCard(cardOrIdx, date) {
   const cards = getCards();
   let card = typeof cardOrIdx === 'number' ? cards[cardOrIdx] : cardOrIdx;
-  if (!card || card.dataset.date !== date) {
-    card = cards.find(c => c.dataset.date === date);
+  if (!card || !datesMatch(card.dataset.date, date)) {
+    card = cards.find(c => datesMatch(c.dataset.date, date));
   }
   if (!card) return;
   
@@ -250,7 +264,7 @@ function injectDiaryToCard(cardOrIdx, date) {
   
   const header = document.createElement('div');
   header.className = 'diary-section-header';
-  header.textContent = '📔 Diary';
+  header.textContent = '📔 日记';
   
   const diaryDiv = document.createElement('div');
   diaryDiv.className = 'diary-content';
