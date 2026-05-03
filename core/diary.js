@@ -160,12 +160,14 @@ function parseDateForSort(dateStr, isDiary = false) {
 }
 
 function extractDateKey(dateStr) {
+  if (!dateStr) return '';
   const match = dateStr.match(/(\d+)月(\d+)日/);
   if (match) return match[1] + '月' + match[2] + '日';
   return dateStr;
 }
 
 function datesMatch(date1, date2) {
+  if (!date1 || !date2) return false;
   return extractDateKey(date1) === extractDateKey(date2);
 }
 
