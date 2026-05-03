@@ -227,16 +227,58 @@ git push origin main
 
 ### APK 生成（可选）
 
-用于 Android 应用分发：
+用于 Android 应用分发。
 
-1. 使用 Capacitor 封装 Web 应用
-2. 构建 APK：
+#### 前置条件
+
+- 安装 Node.js（建议 v16+）
+- 安装 Android Studio
+- 安装 JDK 11+
+
+#### 步骤
+
+1. **安装 Capacitor 依赖**：
    ```bash
-   npx cap init
+   npm install @capacitor/core @capacitor/cli @capacitor/android
+   ```
+
+2. **初始化 Capacitor**：
+   ```bash
+   npx cap init "旅行指南" com.example.travelguide --web-dir .
+   ```
+   注意：`--web-dir .` 表示当前目录作为 Web 资源根目录。
+
+3. **添加 Android 平台**：
+   ```bash
    npx cap add android
+   ```
+
+4. **同步资源到 Android 项目**：
+   ```bash
    npx cap sync
+   ```
+   每次修改 Web 资源后都需要执行此命令。
+
+5. **打开 Android Studio**：
+   ```bash
    npx cap open android
    ```
+
+6. **在 Android Studio 中构建 APK**：
+   - 菜单：Build → Build Bundle(s) / APK(s) → Build APK(s)
+   - 等待构建完成
+   - APK 输出路径：`android/app/build/outputs/apk/debug/app-debug.apk`
+
+7. **安装到手机**：
+   - 将 APK 传输到 Android 手机
+   - 在手机上打开 APK 文件安装
+   - 首次安装需要允许"未知来源"应用
+
+#### 注意事项
+
+- 调试版 APK 可以直接安装，不需要签名
+- 发布到应用商店需要签名：Build → Generate Signed Bundle / APK
+- 每次更新内容后需要重新执行 `npx cap sync` 并重新构建
 
 ## 示例工作流
 

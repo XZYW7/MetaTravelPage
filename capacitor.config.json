@@ -1,0 +1,8 @@
+{
+  "appId": "com.example.travelguide",
+  "appName": "旅行指南",
+  "webDir": ".",
+  "server": {
+    "androidScheme": "https"
+  }
+}

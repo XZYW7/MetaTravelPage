@@ -22,6 +22,8 @@
 
 2. 启动本地服务器：
    ```bash
+   start-server.bat
+   # 或者
    python -m http.server 8000
    ```
 
@@ -44,7 +46,7 @@ travel-page/
 │   └── validate.js             # Schema 校验
 ├── config/                      # 配置文件（自定义此目录）
 │   └── journey.json            # 应用配置
-├── examples/                    # 示例配置
+├── examples/                    # 示例配置（仅作参考）
 │   └── thailand-travel/        # 泰国旅行指南示例
 ├── assets/                      # 静态资源
 │   ├── audio/                  # 音频文件
@@ -54,10 +56,13 @@ travel-page/
 ├── docs/                        # 文档
 │   ├── AGENT_PROMPT.md         # Agent 配置生成指南
 │   ├── SCHEMA.md               # Schema 文档
-│   └── PLUGINS.md              # 插件开发指南
+│   ├── PLUGINS.md              # 插件开发指南
+│   └── WORKFLOW.md             # 完整工作流指南
 ├── index.html                  # 主页面（骨架）
 ├── styles.css                  # 样式
 ├── server.py                   # 可选后端
+├── start-server.bat            # 启动本地服务器
+├── capacitor.config.json       # Capacitor 配置（APK 打包用）
 └── README.md                   # 本文件
 ```
 
@@ -76,6 +81,8 @@ travel-page/
 3. Agent 分析用户提供的旅行材料
 4. Agent 生成 `journey.json` 配置文件
 5. 框架将配置渲染为美观的应用
+
+详细流程请参考 [完整工作流指南](docs/WORKFLOW.md)。
 
 ## 配置说明
 
@@ -142,27 +149,7 @@ python server.py
 
 查看 `examples/thailand-travel/` 目录，这是一个完整的泰国旅行指南示例。
 
-### 使用示例
-
-**方式 1：PowerShell 脚本**
-```powershell
-.\use-example.ps1
-```
-
-**方式 2：手动复制**
-```bash
-# 复制配置
-copy examples\thailand-travel\journey.json config\journey.json
-
-# 复制音频文件
-xcopy /E /I /Y examples\thailand-travel\assets\audio assets\audio
-```
-
-## 文档
-
-- [Agent 配置生成指南](docs/AGENT_PROMPT.md) - 如何使用 AI Agent 生成配置
-- [Schema 文档](docs/SCHEMA.md) - 详细的 Schema 参考
-- [插件开发指南](docs/PLUGINS.md) - 如何开发自定义插件
+本示例的配置已复制到 `config/journey.json`，直接启动服务器即可查看。
 
 ## 部署
 
@@ -183,6 +170,46 @@ python server.py
 ```
 
 服务默认运行在 5000 端口。
+
+### 打包 APK
+
+使用 Capacitor 将 Web 应用打包为 Android APK：
+
+1. 安装依赖：
+   ```bash
+   npm install @capacitor/core @capacitor/cli @capacitor/android
+   ```
+
+2. 初始化 Capacitor：
+   ```bash
+   npx cap init "旅行指南" com.example.travelguide
+   ```
+
+3. 添加 Android 平台：
+   ```bash
+   npx cap add android
+   ```
+
+4. 同步资源：
+   ```bash
+   npx cap sync
+   ```
+
+5. 打开 Android Studio：
+   ```bash
+   npx cap open android
+   ```
+
+6. 在 Android Studio 中构建 APK：
+   - Build → Build Bundle(s) / APK(s) → Build APK(s)
+   - APK 输出路径：`android/app/build/outputs/apk/debug/app-debug.apk`
+
+## 文档
+
+- [Agent 配置生成指南](docs/AGENT_PROMPT.md) - 如何使用 AI Agent 生成配置
+- [Schema 文档](docs/SCHEMA.md) - 详细的 Schema 参考
+- [插件开发指南](docs/PLUGINS.md) - 如何开发自定义插件
+- [完整工作流指南](docs/WORKFLOW.md) - 从材料到应用的完整流程
 
 ## 贡献
 
