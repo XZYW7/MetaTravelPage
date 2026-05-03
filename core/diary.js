@@ -133,6 +133,39 @@ async function saveGlobalDiary() {
   }
 }
 
+function parseDateForSort(dateStr) {
+  // Try to parse dates like "6月15日", "2026年6月15日", "Day 1", etc.
+  const monthDayMatch = dateStr.match(/(\d+)月(\d+)日/);
+  if (monthDayMatch) {
+    return parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2]);
+  }
+  
+  const fullDateMatch = dateStr.match(/(\d+)年(\d+)月(\d+)日/);
+  if (fullDateMatch) {
+    return parseInt(fullDateMatch[2]) * 100 + parseInt(fullDateMatch[3]);
+  }
+  
+  const dayMatch = dateStr.match(/Day\s*(\d+)/i);
+  if (dayMatch) {
+    return 50000 + parseInt(dayMatch[1]);
+  }
+  
+  return 50000;
+}
+
+function sortCards() {
+  const track = document.getElementById('track');
+  const cards = Array.from(track.querySelectorAll('.card'));
+  
+  cards.sort((a, b) => {
+    const aIndex = parseInt(a.dataset.sortIndex) || 50000;
+    const bIndex = parseInt(b.dataset.sortIndex) || 50000;
+    return aIndex - bIndex;
+  });
+  
+  cards.forEach(card => track.appendChild(card));
+}
+
 function createDiaryCard(date, content) {
   const cards = getCards();
   const existingDates = new Set(cards.map(c => c.dataset.date).filter(Boolean));
@@ -141,19 +174,21 @@ function createDiaryCard(date, content) {
   const card = document.createElement('div');
   card.className = 'card';
   card.dataset.date = date;
+  card.dataset.sortIndex = parseDateForSort(date);
   card.innerHTML = `
     <div class="card-header">
       <div class="card-date">${date}</div>
-      <div class="card-title">Diary</div>
-      <div class="card-subtitle">Personal Record</div>
+      <div class="card-title">日记</div>
+      <div class="card-subtitle">个人记录</div>
     </div>
     <div class="diary-section">
-      <div class="diary-section-header">📔 Diary</div>
+      <div class="diary-section-header">📔 日记</div>
       <div class="diary-content">${content}</div>
     </div>
   `;
 
   document.getElementById('track').appendChild(card);
+  sortCards();
   updateView();
 }
 
