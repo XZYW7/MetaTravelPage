@@ -177,7 +177,7 @@ function createDiaryCard(date, content) {
   const card = document.createElement('div');
   card.className = 'card';
   card.dataset.date = date;
-  card.dataset.sortIndex = parseDateForSort(date);
+  card.dataset.sortIndex = parseDateForSort(date, true);
   card.innerHTML = `
     <div class="card-header">
       <div class="card-date">${date}</div>
