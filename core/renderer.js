@@ -72,16 +72,16 @@ function applyTheme(theme) {
 function parseDateForSort(dateStr) {
   if (!dateStr) return 500000;
   
-  // Parse dates like "6月15日", "2026年6月15日", "6月15日 · 第1天"
+  // Parse "2026年5月3日" format
+  const fullMatch = dateStr.match(/(\d+)年(\d+)月(\d+)日/);
+  if (fullMatch) {
+    return (parseInt(fullMatch[2]) * 100 + parseInt(fullMatch[3])) * 10;
+  }
+  
+  // Parse "6月15日" or "6月15日 · 第1天" format
   const monthDayMatch = dateStr.match(/(\d+)月(\d+)日/);
   if (monthDayMatch) {
     return (parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2])) * 10;
-  }
-  
-  // Parse "Day X" format
-  const dayMatch = dateStr.match(/Day\s*(\d+)/i);
-  if (dayMatch) {
-    return (50000 + parseInt(dayMatch[1])) * 10;
   }
   
   return 500000;

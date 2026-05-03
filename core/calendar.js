@@ -1,8 +1,7 @@
 // ========== CALENDAR ==========
 // Calendar component for date selection
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 
-                'July', 'August', 'September', 'October', 'November', 'December'];
+const MONTHS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
 
 let calYear = new Date().getFullYear();
 let calMonth = new Date().getMonth();
@@ -27,7 +26,7 @@ function calNav(dir) {
 }
 
 function renderCalendar() {
-  document.getElementById('calTitle').textContent = calYear + ' ' + MONTHS[calMonth];
+  document.getElementById('calTitle').textContent = calYear + '年' + MONTHS[calMonth];
   const grid = document.getElementById('calGrid');
   const oldDays = grid.querySelectorAll('.cal-day');
   oldDays.forEach(d => d.remove());
@@ -43,7 +42,7 @@ function renderCalendar() {
     btn.className = 'cal-day';
     btn.textContent = d;
 
-    const dateStr = calYear + ' ' + MONTHS[calMonth] + ' ' + d;
+    const dateStr = (calMonth + 1) + '月' + d + '日';
     btn.dataset.date = dateStr;
 
     if (calYear === today.getFullYear() && calMonth === today.getMonth() && d === today.getDate()) {
