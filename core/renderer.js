@@ -163,7 +163,7 @@ function createStandardCard(card) {
   const div = document.createElement('div');
   div.className = 'card';
   div.dataset.cardId = card.id;
-  if (card.sort_index !== undefined) {
+  if (card.sort_index !== undefined && card.sort_index !== null) {
     div.dataset.sortIndex = card.sort_index;
   }
   if (card.date) {
