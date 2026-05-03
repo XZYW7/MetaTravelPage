@@ -23,3 +23,7 @@ build/
 # Local config
 .env
 .env.local
+
+# Runtime data (user-generated)
+diaries/
+data/images/
