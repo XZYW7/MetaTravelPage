@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/XZYW7/travel-page/schema/journey.schema.json",
+  "$id": "https://github.com/XZYW7/MetaTravelPage/schema/journey.schema.json",
   "title": "Journey Configuration",
   "description": "Configuration schema for card-based journey/flow guide applications",
   "type": "object",

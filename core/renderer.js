@@ -69,19 +69,23 @@ function applyTheme(theme) {
   }
 }
 
-function parseDateForSort(dateStr) {
+function parseDateForSort(dateStr, isDiary = false) {
   if (!dateStr) return 500000;
+  
+  let base = 50000;
   
   // Parse "2026年5月3日" format
   const fullMatch = dateStr.match(/(\d+)年(\d+)月(\d+)日/);
   if (fullMatch) {
-    return (parseInt(fullMatch[2]) * 100 + parseInt(fullMatch[3])) * 10;
+    base = parseInt(fullMatch[2]) * 100 + parseInt(fullMatch[3]);
+    return isDiary ? base * 10 + 1 : base * 10;
   }
   
   // Parse "6月15日" or "6月15日 · 第1天" format
   const monthDayMatch = dateStr.match(/(\d+)月(\d+)日/);
   if (monthDayMatch) {
-    return (parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2])) * 10;
+    base = parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2]);
+    return isDiary ? base * 10 + 1 : base * 10;
   }
   
   return 500000;
