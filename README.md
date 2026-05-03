@@ -34,7 +34,7 @@
 ## 项目结构
 
 ```
-travel-page/
+MetaTravelPage/
 ├── core/                        # 核心引擎（不要修改）
 │   ├── renderer.js             # 动态渲染引擎
 │   ├── swipe.js                # 卡片滑动逻辑
@@ -149,7 +149,11 @@ python server.py
 
 查看 `examples/thailand-travel/` 目录，这是一个完整的泰国旅行指南示例。
 
-本示例的配置已复制到 `config/journey.json`，直接启动服务器即可查看。
+切换到 `example` 分支可以查看完整运行效果：
+```bash
+git checkout example
+start-server.bat
+```
 
 ## 部署
 
