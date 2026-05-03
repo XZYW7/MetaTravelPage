@@ -1,0 +1,384 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/XZYW7/travel-page/schema/journey.schema.json",
+  "title": "Journey Configuration",
+  "description": "Configuration schema for card-based journey/flow guide applications",
+  "type": "object",
+  "required": ["schema_version", "app", "cards"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version for compatibility management",
+      "const": "1.0.0"
+    },
+    "app": {
+      "type": "object",
+      "description": "Application metadata and theme configuration",
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Application title displayed on cover and navigation"
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Application subtitle or tagline"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Emoji or icon identifier for the application"
+        },
+        "theme": {
+          "type": "object",
+          "description": "Visual theme configuration",
+          "properties": {
+            "primary": {
+              "type": "string",
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "description": "Primary accent color (hex)"
+            },
+            "secondary": {
+              "type": "string",
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "description": "Secondary accent color (hex)"
+            },
+            "dark_mode": {
+              "type": "boolean",
+              "description": "Whether dark mode is enabled by default"
+            }
+          }
+        },
+        "date_range": {
+          "type": "object",
+          "description": "Date range for the journey/flow",
+          "properties": {
+            "start": {
+              "type": "string",
+              "format": "date",
+              "description": "Start date (YYYY-MM-DD)"
+            },
+            "end": {
+              "type": "string",
+              "format": "date",
+              "description": "End date (YYYY-MM-DD)"
+            }
+          }
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "description": "Feature toggles and plugin configurations",
+      "properties": {
+        "diary": {
+          "type": "object",
+          "description": "Diary/journal feature configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether diary feature is enabled"
+            },
+            "storage": {
+              "type": "string",
+              "enum": ["local", "remote"],
+              "description": "Storage backend type"
+            },
+            "backend_url": {
+              "type": ["string", "null"],
+              "description": "Remote backend URL (null for local storage)"
+            }
+          }
+        },
+        "timer": {
+          "type": "object",
+          "description": "Timer/countdown plugin configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether timer feature is enabled"
+            },
+            "presets": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "description": "Timer preset values in minutes"
+            },
+            "label": {
+              "type": "string",
+              "description": "Timer display label"
+            }
+          }
+        },
+        "phrasebook": {
+          "type": "object",
+          "description": "Phrasebook/audio playback plugin configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether phrasebook feature is enabled"
+            },
+            "language": {
+              "type": "string",
+              "description": "Target language name"
+            },
+            "audio_path": {
+              "type": "string",
+              "description": "Path to audio files directory"
+            }
+          }
+        }
+      }
+    },
+    "cards": {
+      "type": "array",
+      "description": "Array of card definitions",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/coverCard"
+          },
+          {
+            "$ref": "#/definitions/standardCard"
+          },
+          {
+            "$ref": "#/definitions/referenceCard"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "coverCard": {
+      "type": "object",
+      "description": "Cover/landing card",
+      "required": ["id", "type", "title"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique card identifier"
+        },
+        "type": {
+          "const": "cover"
+        },
+        "sort_index": {
+          "type": "integer",
+          "description": "Sort order (lower = earlier)"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "date_range": {
+          "type": "string",
+          "description": "Date range display text"
+        },
+        "download_link": {
+          "type": "object",
+          "properties": {
+            "text": { "type": "string" },
+            "url": { "type": "string" }
+          }
+        }
+      }
+    },
+    "standardCard": {
+      "type": "object",
+      "description": "Standard content card",
+      "required": ["id", "type", "title"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique card identifier"
+        },
+        "type": {
+          "const": "standard"
+        },
+        "sort_index": {
+          "type": "integer",
+          "description": "Sort order (lower = earlier)"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date or date range display text"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "plugins": {
+          "type": "object",
+          "description": "Card-level plugin configurations",
+          "properties": {
+            "timer": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "preset": { "type": "integer" },
+                "label": { "type": "string" }
+              }
+            }
+          }
+        },
+        "sections": {
+          "type": "array",
+          "description": "Content sections within the card",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/definitions/timelineSection" },
+              { "$ref": "#/definitions/tableSection" },
+              { "$ref": "#/definitions/infoBoxSection" },
+              { "$ref": "#/definitions/checklistSection" },
+              { "$ref": "#/definitions/expandableSection" },
+              { "$ref": "#/definitions/phrasebookSection" }
+            ]
+          }
+        }
+      }
+    },
+    "referenceCard": {
+      "type": "object",
+      "description": "Reference/appendix card",
+      "required": ["id", "type", "title"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique card identifier"
+        },
+        "type": {
+          "const": "reference"
+        },
+        "sort_index": {
+          "type": "integer",
+          "description": "Sort order (lower = earlier)"
+        },
+        "date": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/definitions/timelineSection" },
+              { "$ref": "#/definitions/tableSection" },
+              { "$ref": "#/definitions/infoBoxSection" },
+              { "$ref": "#/definitions/checklistSection" },
+              { "$ref": "#/definitions/expandableSection" },
+              { "$ref": "#/definitions/phrasebookSection" }
+            ]
+          }
+        }
+      }
+    },
+    "timelineSection": {
+      "type": "object",
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "timeline" },
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["time", "content"],
+            "properties": {
+              "time": { "type": "string" },
+              "content": { "type": "string" },
+              "variant": {
+                "type": "string",
+                "enum": ["default", "success", "warning", "danger"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "tableSection": {
+      "type": "object",
+      "required": ["type", "headers", "rows"],
+      "properties": {
+        "type": { "const": "table" },
+        "title": { "type": "string" },
+        "headers": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "infoBoxSection": {
+      "type": "object",
+      "required": ["type", "content"],
+      "properties": {
+        "type": { "const": "info_box" },
+        "variant": {
+          "type": "string",
+          "enum": ["info", "warning", "danger", "success"]
+        },
+        "title": { "type": "string" },
+        "content": { "type": "string" }
+      }
+    },
+    "checklistSection": {
+      "type": "object",
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "checklist" },
+        "title": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "expandableSection": {
+      "type": "object",
+      "required": ["type", "title"],
+      "properties": {
+        "type": { "const": "expandable" },
+        "title": { "type": "string" },
+        "content": { "type": "string" }
+      }
+    },
+    "phrasebookSection": {
+      "type": "object",
+      "required": ["type", "phrases"],
+      "properties": {
+        "type": { "const": "phrasebook" },
+        "title": { "type": "string" },
+        "phrases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "中文", "外语"],
+            "properties": {
+              "id": { "type": "string" },
+              "中文": { "type": "string" },
+              "外语": { "type": "string" },
+              "发音": { "type": "string" },
+              "audio": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
