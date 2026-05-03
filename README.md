@@ -125,6 +125,30 @@ This framework is designed to work with AI agents:
 
 See `examples/thailand-travel/` for a complete example of a Thailand travel guide.
 
+### Using the Example
+
+**Option 1: PowerShell Script**
+```powershell
+.\use-example.ps1
+```
+
+**Option 2: Manual Copy**
+```bash
+# Copy config
+copy examples\thailand-travel\journey.json config\journey.json
+
+# Copy audio files
+xcopy /E /I /Y examples\thailand-travel\assets\audio assets\audio
+```
+
+**Option 3: Direct Reference**
+Edit `config/journey.json` and point to the example:
+```json
+{
+  "$ref": "examples/thailand-travel/journey.json"
+}
+```
+
 ## Documentation
 
 - [Agent Prompt Guide](docs/AGENT_PROMPT.md) - How to use AI agents to generate configs
