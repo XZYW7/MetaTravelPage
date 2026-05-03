@@ -70,21 +70,21 @@ function applyTheme(theme) {
 }
 
 function parseDateForSort(dateStr) {
-  if (!dateStr) return 50000;
+  if (!dateStr) return 500000;
   
   // Parse dates like "6月15日", "2026年6月15日", "6月15日 · 第1天"
   const monthDayMatch = dateStr.match(/(\d+)月(\d+)日/);
   if (monthDayMatch) {
-    return parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2]);
+    return (parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2])) * 10;
   }
   
   // Parse "Day X" format
   const dayMatch = dateStr.match(/Day\s*(\d+)/i);
   if (dayMatch) {
-    return 50000 + parseInt(dayMatch[1]);
+    return (50000 + parseInt(dayMatch[1])) * 10;
   }
   
-  return 50000;
+  return 500000;
 }
 
 function renderCards(cards) {

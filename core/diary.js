@@ -133,24 +133,27 @@ async function saveGlobalDiary() {
   }
 }
 
-function parseDateForSort(dateStr) {
+function parseDateForSort(dateStr, isDiary = false) {
   // Try to parse dates like "6月15日", "2026年6月15日", "Day 1", etc.
+  let base = 50000;
+  
   const monthDayMatch = dateStr.match(/(\d+)月(\d+)日/);
   if (monthDayMatch) {
-    return parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2]);
+    base = parseInt(monthDayMatch[1]) * 100 + parseInt(monthDayMatch[2]);
   }
   
   const fullDateMatch = dateStr.match(/(\d+)年(\d+)月(\d+)日/);
   if (fullDateMatch) {
-    return parseInt(fullDateMatch[2]) * 100 + parseInt(fullDateMatch[3]);
+    base = parseInt(fullDateMatch[2]) * 100 + parseInt(fullDateMatch[3]);
   }
   
   const dayMatch = dateStr.match(/Day\s*(\d+)/i);
   if (dayMatch) {
-    return 50000 + parseInt(dayMatch[1]);
+    base = 50000 + parseInt(dayMatch[1]);
   }
   
-  return 50000;
+  // Diary cards get +1 to sort after same-day trip cards
+  return isDiary ? base * 10 + 1 : base * 10;
 }
 
 function sortCards() {
